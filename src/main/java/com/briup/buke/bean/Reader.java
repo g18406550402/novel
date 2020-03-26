@@ -1,6 +1,7 @@
 package com.briup.buke.bean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -29,18 +33,21 @@ public class Reader {
 	private String password;
 	@ApiModelProperty(value="读者邮箱")
 	private String email;
-	@ManyToMany
+	
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "reader_chapter",joinColumns = @JoinColumn(name="reader_id"),
 	inverseJoinColumns = @JoinColumn(name="chapter_id"))
-	private List<Chapter> chapters;
-	@ManyToMany
+	private Set<Chapter> chapters;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "reader_article",joinColumns = @JoinColumn(name="reader_id"),
 	inverseJoinColumns = @JoinColumn(name="article_id"))
-	private List<Article> articles;
-	@ManyToMany
+	private Set<Article> articles;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "reader_comment",joinColumns = @JoinColumn(name="reader_id"),
 			inverseJoinColumns = @JoinColumn(name="comment_id"))
-	private List<Comment> comments;
+	private Set<Comment> comments;
 	public Reader(Integer id, String username, String password, String email) {
 		super();
 		this.id = id;
@@ -75,22 +82,22 @@ public class Reader {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<Chapter> getChapters() {
+	public Set<Chapter> getChapters() {
 		return chapters;
 	}
-	public void setChapters(List<Chapter> chapters) {
+	public void setChapters(Set<Chapter> chapters) {
 		this.chapters = chapters;
 	}
-	public List<Article> getArticles() {
+	public Set<Article> getArticles() {
 		return articles;
 	}
-	public void setArticles(List<Article> articles) {
+	public void setArticles(Set<Article> articles) {
 		this.articles = articles;
 	}
-	public List<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(List<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
 	@Override

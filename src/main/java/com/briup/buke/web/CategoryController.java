@@ -3,7 +3,10 @@ package com.briup.buke.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,13 +26,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
-@RestController
-@RequestMapping("/category")
+@Controller
 @Api(description="栏目相关接口")
 public class CategoryController {
 	@Autowired
 	private ICategoryService categoryService;
-	@GetMapping("/findAll")
+	@GetMapping("/category/findAll")
 	@ApiOperation("查询所有栏目")
 	public Message<List<CategoryPack>> findAll(){
 		List<Category> categoryList = categoryService.findAll();
@@ -40,7 +42,7 @@ public class CategoryController {
 		}
 		return MessageUtil.success(categoryPackList);
 	}
-	@DeleteMapping("/deleteById")
+	@DeleteMapping("/category/deleteById")
 	@ApiOperation("根据id删除栏目")
 	@ApiImplicitParam(name="id",value="栏目id",paramType="query",dataType="int",required=true)
 	public Message<String> deleteById(int id){
@@ -53,7 +55,7 @@ public class CategoryController {
 		}
 		return message;
 	}
-	@PutMapping("/saveOrUpdate")
+	@PutMapping("/category/saveOrUpdate")
 	@ApiOperation("保存或更新一个栏目")
 	
 	public Message<String> saveOrUpdate(CategoryPack categoryPack){
@@ -70,7 +72,7 @@ public class CategoryController {
 		}
 		return message;
 	}
-	@GetMapping("/findById")
+	@GetMapping("/category/findById")
 	@ApiOperation("根据id查询栏目")
 	@ApiImplicitParam(name="id",paramType="query",dataType="int",required=true)
 	public Message<CategoryPack> findById(int id){
@@ -89,19 +91,5 @@ public class CategoryController {
 		
 		return message;
 	}
-	@GetMapping("/findByCategoryId")
-	@ApiOperation("查找该栏目的所有文章")
-	@ApiImplicitParam(name="categoryId",paramType="query",dataType="Integer",required=true)
-	public Message<List<ArticleAndCategoryName>> findByCategoryId(Integer categoryId){
-		List<Article> list = categoryService.findByCategory(categoryId);
-		System.out.println(list);
-		List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
-		for(Article article:list) {
-			ArticleAndCategoryName ac = new ArticleAndCategoryName(article.getId(), article.getAuthor(), article.getClickTimes(), 
-					article.getIntro(), article.getUpdateDate(), 
-					article.getTitle(),article.getState(),article.getWords(),article.getImage(), categoryService.findNameById(article.getCategory_id()));
-			aclist.add(ac);
-		}
-		return MessageUtil.success(aclist);
-	}
 }
+

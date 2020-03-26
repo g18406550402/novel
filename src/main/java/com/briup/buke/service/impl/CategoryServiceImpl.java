@@ -63,7 +63,7 @@ public class CategoryServiceImpl implements ICategoryService{
 		if(category!=null){
 			return category;
 		}else {
-			throw new Exception("改id在数据库中不存在！");
+			throw new Exception("该id在数据库中不存在！");
 		}
 	}
 	@Override
@@ -77,11 +77,7 @@ public class CategoryServiceImpl implements ICategoryService{
 		}else
 			return null;
 	}
-	@Override
-	public List<Article> findByCategory(Integer categoryId) {
-		List<Article> articleList = articleDao.findByCategory(categoryId);
-		return articleList;
-	}
+	
 	@Override
 	public String findNameById(Integer id)  {
 		

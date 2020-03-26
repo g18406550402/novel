@@ -21,5 +21,4 @@ public interface CategoryDao extends JpaRepository<Category, Integer> {
 	@Modifying
 	@Query(value="delete from book_category where id= ?1",nativeQuery=true)
 	public void deleteById(Integer id);
-	
 }

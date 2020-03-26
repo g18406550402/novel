@@ -44,7 +44,7 @@ public class Article {
 	@Column(columnDefinition="text")
 	@ApiModelProperty(value="文章简介")
 	private String intro;
-	@ApiModelProperty(value="文章点击次数",hidden=true)
+	@ApiModelProperty(value="文章更新时间",hidden=true)
 	@Column(name="updateDate")
 	private Date updateDate;
 	@ApiModelProperty(value="文章标题")

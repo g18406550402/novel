@@ -19,4 +19,6 @@ public interface IReaderService {
 	public void addBookMark(Integer reader_id,Integer chapter_id);
 	
 	public void commentaryArticle(Integer reader_id,Comment comment);
+	
+	public Reader login(String username,String password) throws Exception;
 }

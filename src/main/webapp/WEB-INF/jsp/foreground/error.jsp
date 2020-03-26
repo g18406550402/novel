@@ -20,7 +20,7 @@
 				<div class="blocktitle">出现错误！</div>
 				<div class="blockcontent">
 					<div style="text-align: center; padding: 10px">
-						<br />错误原因：密码错误，请注意字母大小写是否输入正确！！<br />
+						<br />错误原因：${msg }<br />
 						<br />或者 —— <a href="getpass.php">找回用户密码</a><br />
 						<br />请 <a href="javascript:history.back(1)">返 回</a> 并修正<br />
 						<br />

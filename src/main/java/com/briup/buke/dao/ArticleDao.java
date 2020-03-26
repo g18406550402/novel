@@ -24,4 +24,6 @@ public interface ArticleDao extends JpaRepository<Article, Integer>{
 	@Query(value="select * from book_article c where c.title like %?1% or c.author like %?1%",nativeQuery=true)
 	public List<Article> findByTitleOrArthor(String titleaOrAuthor);
 	
+	@Query(value="select c.title from book_article c where c.id=?1",nativeQuery=true)
+	public String findArticleNameByArticleId(Integer id);
 }

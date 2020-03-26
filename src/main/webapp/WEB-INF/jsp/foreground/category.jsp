@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<title>好看的${articleList[1].categoryName }小说</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>布克小说_最值得书友收藏的网络小说阅读网</title>
 <meta name="description"
@@ -18,55 +20,34 @@
 	<div id="main">
 	<div class="list_center">
 		<div class="update_title">
-			<span class="update_icon">言情女生·小说列表</span>
+			<span class="update_icon">${articleList[1].categoryName }·小说列表</span>
 		</div>
 		<div id="sitebox">
+			<c:forEach items="${articleList }" var="article">
 			<dl>
 				<dt>
-					<a href="https://www.x23qb.com/book/188238/"><img
-						src="https://www.x23qb.com/files/article/image/188/188238/188238s.jpg"
-						alt="陆太太复婚吧" height="150" width="107"></a><span>言情女生</span>
+					<a href="/foreground/toArticle?id=${article.id }"><img
+						src="${article.image }"
+						alt="${article.title }" height="150" width="107"></a><span>${article.categoryName }</span>
 				</dt>
 				<dd>
 					<h3>
-						<span class="uptime">2020-03-24</span><a
-							href="https://www.x23qb.com/book/188238/">陆太太复婚吧</a>
+						<span class="uptime">${article.updateDate }</span><a
+							href="/foreground/toArticle?id=${article.id }">${article.title }</a>
 					</h3>
 				</dd>
 				<dd class="book_other">
-					子类：<span>言情女生</span>状态：<span>连载中</span>字数：<span>123727</span>
+					子类：<span>${article.categoryName }</span>状态：<span>${article.state}</span>字数：<span>${article.words}万</span>
 				</dd>
 				<dd class="book_des">
-					三年前，宋如意为救母，嫁给了云城首富陆先生。三年后，宋如意带着小拖油瓶穿梭在景城的大街小巷中。一天，小拖油瓶好奇心爆棚，趁宋如意没注意，旋转了电动车的加速把。宋如意吓坏了，猛的一波操作。…
+					${article.intro}
 				</dd>
 				<dd class="book_other">
 					最新章节：<a href="/book/188238/72708509.html">046 要人不知，除非莫为（加更）</a>
 				</dd>
 			</dl>
-			<dl>
-				<dt>
-					<a href="https://www.x23qb.com/book/161101/"><img
-						src="https://www.x23qb.com/files/article/image/161/161101/161101s.jpg"
-						alt="重生八八年代：农媳有点甜" height="150" width="107"></a><span>言情女生</span>
-				</dt>
-				<dd>
-					<h3>
-						<span class="uptime">2020-03-24</span><a
-							href="https://www.x23qb.com/book/161101/">重生八八年代：农媳有点甜</a>
-					</h3>
-				</dd>
-				<dd class="book_other">
-					子类：<span>言情女生</span>状态：<span>连载中</span>字数：<span>2144903</span>
-				</dd>
-				<dd class="book_des">
-					一觉醒来，关朝楚成了八八年代十九岁为爱冲昏头脑，名声狼藉的软包子关家大女儿，为爱冲昏了头脑，辍学嫁进江家做牛做马甚至掏空娘家家底，为爱甚至不惜自毁前程被冠出轨的名声，重生过来的关朝楚顶着…
-				</dd>
-				<dd class="book_other">
-					最新章节：<a href="/book/161101/72708221.html">第1172章 你是不是误会什么了</a>
-				</dd>
-			</dl>
-			<div class="clearfix"></div>
-		</div>
+			</c:forEach>
+	</div>
 	</div>
 	</div>
 	<div id="footer">

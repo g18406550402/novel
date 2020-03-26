@@ -15,6 +15,9 @@ public interface IArticleService {
 	
 	public Integer findCategoryIdById(Integer id);
 	
+	public List<Article> findByCategory(Integer categoryId);
 	
-	public List<Article> findByTitleOrArthor(String titleOrAuthor)throws Exception;
+	public List<Article> findByTitleOrArthor(String titleOrAuthor);
+	
+	public String findArticleNameByArticleId(Integer id);
 }

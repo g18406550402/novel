@@ -89,12 +89,20 @@ public class ArticleServiceImpl implements IArticleService{
 	}
 	
 	@Override
-	public List<Article> findByTitleOrArthor(String titleOrAuthor)throws Exception {
+	public List<Article> findByTitleOrArthor(String titleOrAuthor) {
 		List<Article> articleList = articleDao.findByTitleOrArthor(titleOrAuthor);
-		if(articleList!=null)
-			return articleList;
-		else 
-			throw new Exception("没有想要的书籍！");
+		return articleList;
+	}
+	
+	@Override
+	public List<Article> findByCategory(Integer categoryId) {
+		List<Article> articleList = articleDao.findByCategory(categoryId);
+		return articleList;
+	}
+	@Override
+	public String findArticleNameByArticleId(Integer id) {
+		String articleName = articleDao.findArticleNameByArticleId(id);
+		return articleName;
 	}
 	
 }

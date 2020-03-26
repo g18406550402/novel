@@ -17,7 +17,7 @@ public class ArticleAndCategoryName {
 	@ApiModelProperty(value="文章简介")
 	private String intro;
 	@ApiModelProperty(value="文章更新时间",hidden=true)
-	private Date updateDate;
+	private String updateDate;
 	@ApiModelProperty(value="文章标题")
 	private String title;
 	@ApiModelProperty(value="文章状态")
@@ -31,7 +31,7 @@ public class ArticleAndCategoryName {
 	public ArticleAndCategoryName() {
 	}
 
-	public ArticleAndCategoryName(Integer id, String author, Integer clickTimes, String intro, Date updateDate,
+	public ArticleAndCategoryName(Integer id, String author, Integer clickTimes, String intro, String updateDate,
 			String title, String state, Integer words, String image,String categoryName) {
 		super();
 		this.id = id;
@@ -89,11 +89,11 @@ public class ArticleAndCategoryName {
 		this.intro = intro;
 	}
 
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 

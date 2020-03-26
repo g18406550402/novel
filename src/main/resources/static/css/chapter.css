@@ -34,7 +34,7 @@ em, i {
 
 img {
 	-webkit-box-shadow: 1px 1px 2px #bbb;
-	-moz-box-shadow: 1px 1px 2px #bbb;
+	
 	box-shadow: 1px 1px 2px #bbb;
 	border-radius: .3em
 }
@@ -268,7 +268,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .book-mark {
-	background: url(xs_sprite.png) no-repeat;
+	background: url(../images/chapter/xs_sprite.png) no-repeat;
 	height: 40px;
 	position: absolute;
 	right: 20px;
@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon, .mlfy_main_sz .icon, .zjny .icon {
-	background-image: url(xs_sprite.png);
+	background-image: url(../images/chapter/xs_sprite.png);
 	background-repeat: no-repeat
 }
 
@@ -461,7 +461,7 @@ h1, h2, h3, h4, h5, h6 {
 	height: 34px;
 	width: 34px;
 	*height: 32px;
-	*width: 32px;
+	
 	border-radius: 50%;
 	display: block;
 	float: left;
@@ -500,14 +500,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .mlfy_main_sz.b2 ul li i.c7 {
 	background-color: #474947;
-	background-image: url(xs_sprite.png);
+	background-image: url(../images/chapter/xs_sprite.png);
 	background-repeat: no-repeat;
 	background-position: center -589px
 }
 
 .mlfy_main_sz.b2 ul li i.hover {
 	border: 1px solid #ed4259;
-	background-image: url(xs_sprite.png);
+	background-image: url(../images/chapter/xs_sprite.png);
 	background-repeat: no-repeat;
 	background-position: center -398px;
 	*background-position: center-400px
@@ -582,7 +582,7 @@ h1, h2, h3, h4, h5, h6 {
 	width: 78px;
 	cursor: pointer;
 	height: 34px;
-	background-image: url(xs_sprite.png);
+	background-image: url(../images/chapter/xs_sprite.png);
 	background-repeat: no-repeat
 }
 
@@ -717,15 +717,15 @@ ul.links a {
 }
 
 .bg1 {
-	background: #ebe5d8 url(shennuan.png) repeat
+	background: #ebe5d8 url(../images/chapter/shennuan.png) repeat
 }
 
 .bg2 {
-	background: #dfd2ab url(shenhuang.png) repeat
+	background: #dfd2ab url(../images/chapter/shenhuang.png) repeat
 }
 
 .bg2 .mlfy_main, .bg2 .mlfy_page {
-	background: #efe3bf url(huang.png) repeat
+	background: #efe3bf url(../images/chapter/huang.png) repeat
 }
 
 .bg2 .mlfy_main_l i.hover, .bg2 .mlfy_main_sz, .bg2 .mlfy_main_sz .kuai
@@ -739,11 +739,11 @@ ul.links a {
 }
 
 .bg3 {
-	background: #d3e2d1 url(shenlv.png) repeat
+	background: #d3e2d1 url(../images/chapter/shenlv.png) repeat
 }
 
 .bg3 .mlfy_main, .bg3 .mlfy_page {
-	background: #e1ede1 url(lv.png) repeat
+	background: #e1ede1 url(../images/chapter/lv.png) repeat
 }
 
 .bg3 .mlfy_main_l i.hover, .bg3 .mlfy_main_sz {
@@ -751,11 +751,11 @@ ul.links a {
 }
 
 .bg4 {
-	background: #d1dcdd url(shenlan.png) repeat
+	background: #d1dcdd url(../images/chapter/shenlan.png) repeat
 }
 
 .bg4 .mlfy_main, .bg4 .mlfy_page {
-	background: #dfecf0 url(lan.png) repeat
+	background: #dfecf0 url(../images/chapter/lan.png) repeat
 }
 
 .bg4 .mlfy_main_l i.hover, .bg4 .mlfy_main_sz {
@@ -775,11 +775,11 @@ ul.links a {
 }
 
 .bg6 {
-	background: #d3d3d1 url(shenhui.png) repeat
+	background: #d3d3d1 url(../images/chapter/shenhui.png) repeat
 }
 
 .bg6 .mlfy_main, .bg6 .mlfy_page {
-	background: #dcdcdc url(hui.png) repeat
+	background: #dcdcdc url(../images/chapter/hui.png) repeat
 }
 
 .bg6 .mlfy_main_l i.hover, .bg6 .mlfy_main_sz {
@@ -787,11 +787,11 @@ ul.links a {
 }
 
 .bg7 {
-	background: #040404 url(shenhei.png) repeat
+	background: #040404 url(../images/chapter/shenhei.png) repeat
 }
 
 .bg7 .mlfy_main, .bg7 .mlfy_page {
-	background: #161819 url(hei.png) repeat
+	background: #161819 url(../images/chapter/hei.png) repeat
 }
 
 .bg7 .mlfy_main_l i.hover, .bg7 .mlfy_main_sz, .bg7 .top, .bg7 .top .bar ul input.putk
@@ -892,16 +892,16 @@ ul.links a {
 }
 
 body.hui {
-	background: #dcdcdc url(bg-hui.png) repeat
+	background: #dcdcdc url(../images/chapter/bg-hui.png) repeat
 }
 
 body.gd {
-	background: #000 url(bg-hei.png) repeat;
+	background: #000 url(../images/chapter/bg-hei.png) repeat;
 	color: #666
 }
 
 body.ls {
-	background: #cddfcd url(bg-lv.png) repeat;
+	background: #cddfcd url(../images/chapter/bg-lv.png) repeat;
 	color: #555
 }
 
@@ -910,17 +910,17 @@ body.fs {
 }
 
 body.nuan {
-	background: #ede7da url(bg-nuan.png) repeat;
+	background: #ede7da url(../images/chapter/bg-nuan.png) repeat;
 	color: #4c3120
 }
 
 body.huang {
-	background: #e0ce9e url(bg-huang.png) repeat;
+	background: #e0ce9e url(../images/chapter/bg-huang.png) repeat;
 	color: #4c3120
 }
 
 body.lan {
-	background: #cfdde1 url(bg-lan.png) repeat
+	background: #cfdde1 url(../images/chapter/bg-lan.png) repeat
 }
 
 .gd .theme {
@@ -935,7 +935,7 @@ body.lan {
 	float: right;
 	width: 32px;
 	height: 32px;
-	background: url(articleset-icon.png) no-repeat;
+	background: url(../images/chapter/articleset-icon.png) no-repeat;
 	margin-left: 10px
 }
 
@@ -1006,7 +1006,7 @@ body.lan {
 	border: 1px solid #999;
 	padding: 2px;
 	opacity: .5;
-	background-image: url(cai.png)
+	background-image: url(../images/chapter/cai.png)
 }
 
 .toolbar .theme .theme-area .ptm-btn {
@@ -1036,14 +1036,14 @@ body.lan {
 
 [class^=icon-], [class*=" icon-"] {
 	font-family: icomoon !important;
-	speak: none;
+	
 	font-style: normal;
 	font-weight: 400;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale
+	
 }
 
 .icon-quill:before {
@@ -1156,12 +1156,6 @@ body.lan {
 	border: 2px solid #fff
 }
 
-::-webkit-scrollbar-thumb:hover {
-	height: 30px;
-	background-color: #9f9f9f;
-	-webkit-border-radius: 8px
-}
-
 @media screen and (max-width:768px) {
 	.top, .mlfy_main_l .hid, .mlfy_main_sz .hid, .fl, .mlfy_main_sz.b2 ul li .zt .hid,
 		.mlfy_main_sz .ml, .mlfy_main_sz .btn-wrap a.grey-btn {
@@ -1249,7 +1243,7 @@ body.lan {
 	font-size: 16px;
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale
+	
 }
 
 .tb-toolbar-icon-home:before {

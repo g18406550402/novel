@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,17 +89,24 @@ public class ReaderServiceImpl implements IReaderService{
 	public void addToBookShelf(Integer reader_id, Integer article_id) {
 		Reader reader = readerDao.findById(reader_id).get();
 		Article article = articleDao.findById(article_id).get();
-		List<Article> articleList = reader.getArticles();
+		Set<Article> articleList = reader.getArticles();
 		articleList.add(article);
+		reader.setArticles(articleList);
 		readerDao.save(reader);
 	}
 
 	@Override
 	public void addBookMark(Integer reader_id, Integer chapter_id) {
 		Reader reader = readerDao.findById(reader_id).get();
+		//添加书签
 		Chapter chapter = chapterDao.findById(chapter_id).get();
-		List<Chapter> chapterList = reader.getChapters();;
+		Set<Chapter> chapterList = reader.getChapters();
 		chapterList.add(chapter);
+		//添加到我的书籍
+		Article article = articleDao.findById(chapter.getArticleId()).get();
+		Set<Article> articleList = reader.getArticles();
+		articleList.add(article);
+		reader.setArticles(articleList);
 		reader.setChapters(chapterList);
 		readerDao.save(reader);
 	}
@@ -111,10 +119,25 @@ public class ReaderServiceImpl implements IReaderService{
 		comment.setPublishDate(new Date());
 		commentDao.save(comment);
 		//添加关系
-		List<Comment> commentList = reader.getComments();
+		Set<Comment> commentList = reader.getComments();
 		commentList.add(comment);
 		reader.setComments(commentList);
 		readerDao.save(reader);
+		
+	}
+
+	@Override
+	public Reader login(String username, String password) throws Exception {
+		Reader reader = readerDao.findByUsername(username);
+		if(reader!=null) {
+			if(password.equals(reader.getPassword())) {
+				return reader;
+			}else {
+				throw new Exception("密码错误，请注意字母大小写是否输入正确！！"); 
+			}
+		}else {
+			throw new Exception("用户名错误，请确认用户名是否输入正确！！"); 
+		}
 		
 	}
 	 

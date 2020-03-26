@@ -18,7 +18,7 @@ public interface ICategoryService {
 	
 	public Integer findIdByName(String name)throws Exception;
 	
-	public List<Article> findByCategory(Integer categoryId);
+	
 	
 	public String findNameById(Integer id);
 	

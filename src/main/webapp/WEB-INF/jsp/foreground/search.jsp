@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,29 +20,31 @@
 				<span class="update_icon">搜索结果</span>
 			</div>
 			<div id="sitebox">
+				 <c:forEach items="${articleList}" var="article">
 				 <dl id="nr">
 					<dt>
-						<a href="https://www.x23qb.com/book/17181/"><img
-							src="https://www.x23qb.com/files/article/image/17/17181/17181s.jpg"
-							alt="重生之都市狂仙" height="150" width="107"></a><span>都市青春</span>
+						<a href="foreground/toArticle?id=${article.id}"><img
+							src="${article.image} "
+							alt="重生之都市狂仙" height="150" width="107"></a><span>${article.categoryName} </span>
 					</dt>
 					<dd>
 						<h3>
-							<span class="uptime">2020-03-24</span><a
-								href="https://www.x23qb.com/book/17181/">重生之都市狂仙</a>
+							<span class="uptime">${article.updateDate }</span><a
+								href="https://www.x23qb.com/book/17181/">${article.title }</a>
 						</h3>
 					</dd>
 					<dd class="book_other">
-						子类：<span>都市青春</span>状态：<span>连载中</span>字数：<span>8253738</span>
+						子类：<span>${article.categoryName}</span>状态：<span>${article.state}</span>字数：<span>${article.words} 万</span>
 					</dd>
 					<dd class="book_des">
-						剑斩风雷遮日月，掌握乾坤捣幽冥。世间人有六十亿，唯我一人称骄狂。仙界青帝重生万年前，降临在繁华都市，灯红酒绿，谁人醉卧美人膝，纸醉金迷，谁人醒掌杀人剑。世人笑我猖，世…
+						${article.intro }
 					</dd>
 					<dd class="book_other">
 						最新章节：<a href="/book/17181/72708195.html">第3156章 好看么？</a>
 					</dd>
 				</dl>
-				<dl id="nr">
+				</c:forEach>
+				<!-- <dl id="nr">
 					<dt>
 						<a href="https://www.x23qb.com/book/189069/"><img
 							src="https://www.x23qb.com/files/article/image/189/189069/189069s.jpg"
@@ -62,10 +65,10 @@
 					<dd class="book_other">
 						最新章节：<a href="/book/189069/72708194.html">第34章 被撩</a>
 					</dd>
-				</dl>
+				</dl> -->
 
 				<div id="tipss" class="tipss">
-					抱歉，没有找到你想要的小说<br />请确认搜索内容字并尽可能的<br /> <br />△ <em
+					抱歉，没有找到你想要的小说<br />请确认搜索内容字并尽可能正确<br /> <br />△ <em
 						style="color: red; font-size: 16px; font-weight: bold; font-style: normal">减少关键词字数，如：重生</em>
 					△<br /> <br /> <em style="color: red; font-style: normal">※
 						不支持繁体搜索，请输入简体字 ※</em><br /> <br />
