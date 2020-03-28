@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,16 +32,17 @@ import io.swagger.annotations.ApiOperation;
 public class CategoryController {
 	@Autowired
 	private ICategoryService categoryService;
-	@GetMapping("/category/findAll")
+	@GetMapping("/background/findAllCategory")
 	@ApiOperation("查询所有栏目")
-	public Message<List<CategoryPack>> findAll(){
+	public String findAll(HttpServletRequest request){
 		List<Category> categoryList = categoryService.findAll();
 		List<CategoryPack> categoryPackList = new ArrayList<CategoryPack>();
 		for(Category c:categoryList) {
 			CategoryPack categoryPack=new CategoryPack(c.getId(), c.getCode(), c.getName());
 			categoryPackList.add(categoryPack);
 		}
-		return MessageUtil.success(categoryPackList);
+		request.setAttribute("categoryList", categoryPackList);
+		return "background/category";
 	}
 	@DeleteMapping("/category/deleteById")
 	@ApiOperation("根据id删除栏目")

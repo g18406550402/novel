@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>登录</title>
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="/css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -53,7 +53,7 @@
 				<h2>登录</h2>
 			</div>
 			<div class="sub-head"></div>
-			<form id="form1" action="login" method="post">
+			<form id="form1" action="/background/login" method="post">
 				<input name="username" type="text" class="text" value="输入姓名"
 					onfocus="this.value = '';"
 					onblur="if (this.value == '') {this.value = 'Username';}" onkeydown="keydown(event)">

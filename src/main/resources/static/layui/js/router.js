@@ -1,36 +1,19 @@
 $(function(){
-  $('.layui-nav-child').on({
-    click:function(){
-      if($(this).text()=="商机开发计划"){
-        $('.layui-body').load('./pages/plan.html');
+  $('.layui-nav-child').on({click:function(){
+      if($(this).text()=="栏目信息查询"){
+        $('.layui-body').load('background/findAllCategory');
        
       }
-       if($(this).text()=="销售商机管理"){
+       if($(this).text()=="文章信息查询"){
         $('.layui-body').load('./pages/sales.html');
         
       }
-       if($(this).text()=="客户信息查询"){
+       if($(this).text()=="章节信息查询"){
         $('.layui-body').load('customer/findAllCustomerByPage/1');
         
       }
-      // if($(this).text()=="客户信息添加"){
-      //   $('.layui-body').load('./pages/customer_add.html');
-       
-      // }
-      if($(this).text()=="服务反馈"){
+      if($(this).text()=="读者信息查询"){
         $('.layui-body').load('./pages/feedback.html');
-        
-      }
-      if($(this).text()=="服务处理"){
-        $('.layui-body').load('./pages/service.html');
-       
-      }
-      if($(this).text()=="客户贡献分析"){
-        $('.layui-body').load('./pages/customerContribution.html');
-       
-      }
-       if($(this).text()=="客户构成分析"){
-        $('.layui-body').load('./pages/customerConstitute.html');
         
       }
        if($(this).text()=="角色管理"){

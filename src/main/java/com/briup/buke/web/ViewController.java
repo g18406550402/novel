@@ -16,7 +16,7 @@ public class ViewController {
 	private IReaderService readerService;
 	//跳转到首页
 	@RequestMapping("/foreground/index")
-	public String toIndex() {
+	public String toForegroundIndex() {
 		return "foreground/index";
 	}
 	//跳转到个人中心
@@ -49,5 +49,14 @@ public class ViewController {
 		}
 		return "foreground/bookmark";
 	}
-
+	//跳转到后台管理登录页面
+	@RequestMapping("/background/toLogin")
+	public String backgroundToLogin() {
+		return "background/login";
+	}
+	//跳转到都断管理首页
+	@RequestMapping("/background/toIndex")
+	public String backgroundToINdex() {
+		return "background/index";
+	}
 }
