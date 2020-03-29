@@ -5,31 +5,17 @@
 <!-- 客户信息查询 -->
 <div id="category">
 <div>
-  <form class="form-inline">
+<%--   <form class="form-inline">
   <div class="form-group">
-    <input type="text" class="form-control" id="exampleInputEmail3" placeholder="请输入客户名称">
-  </div>
-  <div class="form-group">
-	<select name="city" id="" class="form-control">
-		 <option value="">请选择所属地区</option>
-        <option value="0">华中</option>
-        <option value="1">华北</option>
-        <option value="2">华南</option>
-        <option value="3">华东</option>
-	</select>
-  </div>
-  <div class="form-group">
-	<select name="lever" id="" class="form-control">
-		<option value="">请选择客户等级</option>
-        <option value="0">普通客户</option>
-        <option value="1">大客户</option>
-        <option value="2">重点开发客户</option>
-        <option value="3">合作伙伴</option>
-        <option value="4">战略合作伙伴</option>
+	<select name="name" id="" class="form-control">
+		<option value="">请选择栏目名称</option>
+		<c:forEach items="${categoryList }" var="category">
+        <option value="${category.id }">${category.name }</option>
+		</c:forEach>
 	</select>
   </div>
   <input class="btn btn-default search" type="button" value="查询">
-  <input class="btn btn-default" type="reset" value="重置">
+  <input class="btn btn-default" type="reset" value="重置"> --%>
   <input class="btn btn-default" type="button" value="新增" id="add">
 </form>
 </div>
@@ -38,10 +24,8 @@
 		 <thead>
 		    <tr style="background:#E8E8E8;">
 		      <th>序号</th>
-		      <th>客户名称</th>
-		      <th>客户经理</th>
-		      <th>所属地区</th>
-		      <th>客户等级</th>			 
+		      <th>栏目代码</th>
+		      <th>栏目名称</th>		 
 			  <th >操作</th>
 		    </tr> 
 		  </thead>
@@ -52,9 +36,8 @@
 			      <td>${category.code}</td>
 			      <td>${category.name}</td>
 			      <td class="test">	
-			      	<i value="${category.id}"class="layui-icon layui-icon-edit first" title="编辑客户信息"></i> 
-			        <i class="layui-icon layui-icon-username user" title="查看栏目文章信息"></i>  
-			        <i value="${category.id}" class="layui-icon layui-icon-delete deletee" title="删除客户记录"></i>    
+			      	<i value="${category.id}"class="layui-icon layui-icon-edit first" title="编辑栏目信息"></i> 
+			        <i value="${category.id}" class="layui-icon layui-icon-delete deletee" title="删除栏目记录"></i>    
 			      </td>
 			    </tr> 
 		   	 </c:forEach>
@@ -83,12 +66,12 @@
        <form>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>栏目名称:</label>
-							<input type="text" name="name"  class="form-control">
+							<label>栏目代码:</label>
+							<input type="text" name="categoryCode" class="form-control">
 						</div>
 						<div class="form-group">
-							<label>栏目代码:</label>
-							<input type="text" name="maName" class="form-control">
+							<label>栏目名称:</label>
+							<input type="text" name="categoryName"  class="form-control">
 						</div>
 					</div>
 				</form>
@@ -101,7 +84,10 @@
 </div>
 </div>
 <style>
-#customer{
+#add{
+	margin-left:980px;
+}
+#category{
 	width: 1140px;
 	overflow: hidden;
 }
@@ -126,9 +112,6 @@
 	.table th,td{
 		text-align: center;
 	}
-	#add{
-		margin-left: 250px;
-	}
 	#toAdd{
 		margin-top: 50px;
 	}
@@ -142,8 +125,9 @@
 		$(".layui-body").load(url);
 	}
 	$(function(){
-		let cust_id;
-		$('.user').on('click',function(){
+		let categoryId;
+		//点击查看栏目文章信息		
+		$('.category-article').on('click',function(){
 			$('.layui-body').load('./pages/linkman.html');  
 		})
 		$('.editRecord').on('click',function(){
@@ -161,41 +145,33 @@
 		})
 		// 新增模态框保存
 		$('button:contains(保存)').on('click',function(){
-			let custName = $("input[name=custName]").val();
-			let maName = $("input[name=maName]").val();
-			let region = $("select[name=region] option:selected").val();
-			let level = $("select[name=level] option:selected").val();
+			let categoryName = $("input[name=categoryName]").val();
+			let categoryCode = $("input[name=categoryCode]").val();
 			let data = {
-				custId:cust_id,
-				custName:custName,
-				custManagerName:maName,
-				custRegion:region,
-				custLevelLabel:level
+				id:categoryId,
+				name:categoryName,
+				code:categoryCode,
 			};
 			console.log(data);
-			let url = "customer/saveOrUpdate";
+			let url = "/background/category/saveOrUpdate";
 			$.post(url,data,function(data){
-				$(".layui-nav-item dd:contains('客户信息查询')").trigger("click");
+				$(".layui-nav-item dd:contains('栏目信息查询')").trigger("click");
 			})
 		})	
 		// 显示编辑模态框
 		$('.first').click(function(){
-			cust_id = $(this).attr("value");
-			alert(cust_id);
-			let url = "customer/findCustomerById/"+cust_id;
+			categoryId = $(this).attr("value");
+			let url = "/background/category/findById/"+categoryId;
 			$.post(url,function(data){
 				console.log(data);
-				$("input[name=custName]").val(data.custName);
-				$("input[name=maName]").val(data.custManagerName);
-				$("select[name=region]").val(data.custRegion);
-				$("select[name=level]").val(data.custLevelLabel);
+				$("input[name=categoryName]").val(data.name);
+				$("input[name=categoryCode]").val(data.code);
 			});
 			$('#toAdd').show();
 		})
 		// 显示删除模态框
 		$('.deletee').click(function(){
-			cust_id=$(this).attr("value");
-			alert(cust_id);
+			categoryId=$(this).attr("value");
 			$('#deleteModal').show();
 		})
 		// 关闭删除模态框
@@ -208,10 +184,10 @@
 		})
 		// 确定删除
 		$('.btn-primary').click(function(){
-			let url = "customer/deleteCustomerById/"+cust_id;
+			let url = "/background/category/deleteById/"+categoryId;
 			$.get(url,function(data){
 				alert(data);
-				$(".layui-nav-item dd:contains('客户信息查询')").trigger("click");
+				$(".layui-nav-item dd:contains('栏目信息查询')").trigger("click");
 			});
 			$('#deleteModal').hide();
 		})

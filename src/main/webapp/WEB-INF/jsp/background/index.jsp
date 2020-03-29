@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>客户关系管理</title>
-<script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
 <link rel="stylesheet" href="/layui/css/layui.css">
 <link rel="stylesheet"
 	href="/css/bootstrapSwitch/css/bootstrap3/bootstrap-switch.min.css">

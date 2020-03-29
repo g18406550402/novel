@@ -26,7 +26,7 @@ public class Category {
 	@ApiModelProperty(value="栏目id")
 	private Integer id;
 	@ApiModelProperty(value="栏目代码",required=true)
-	private long code;
+	private Long code;
 	@ApiModelProperty(value="栏目名",required=true)
 	@Column(unique=true)
 	private String name;
@@ -38,24 +38,24 @@ public class Category {
 	}
 
 	
-	public void setCode(long code) {
+	public void setCode(Long code) {
 		this.code = code;
 	}
 
 	
-	public Category(long code, String name) {
+	public Category(Long code, String name) {
 		super();
 		this.code = code;
 		this.name = name;
 	}
 
 
-	public long getCode() {
+	public Long getCode() {
 		return code;
 	}
 
 
-	public Category(Integer id, long code, String name) {
+	public Category(Integer id, Long code, String name) {
 		super();
 		this.id = id;
 		this.code = code;

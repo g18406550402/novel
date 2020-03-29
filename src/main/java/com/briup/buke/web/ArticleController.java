@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.buke.bean.Article;
@@ -39,9 +41,11 @@ public class ArticleController {
 	private ICategoryService categoryService;
 	@Autowired
 	private IChapterService chapterService;
-	@PostMapping("/article/saveOrUpdate")
+	
+	@RequestMapping(value="/background/article/saveOrUpdate",method=RequestMethod.POST)
 	@ApiOperation(value="保存或更新一篇文章")
-	public Message<String> saveOrUpdate(ArticleAndCategoryName articleAndCategoryName){
+	@ResponseBody
+	public String saveOrUpdate(ArticleAndCategoryName articleAndCategoryName){
 		//封装文章信息
 		Article article = new Article();
 		Integer id = articleAndCategoryName.getId();
@@ -65,7 +69,7 @@ public class ArticleController {
 			String categoryName = articleAndCategoryName.getCategoryName();
 			categoryId = categoryService.findIdByName(categoryName);
 		} catch (Exception e1) {
-			return MessageUtil.error(500, e1.getMessage());
+			return e1.getMessage();
 		}
 		
 			article.setCategory_id(categoryId);
@@ -73,13 +77,15 @@ public class ArticleController {
 			articleService.saveOrUpdate(article);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			return MessageUtil.error(500, e.getMessage());
+			return e.getMessage();
 		}
-		return MessageUtil.success("更新成功！");
+		return "更新成功！";
 	}
+	
+	
 	@RequestMapping("/foreground/toArticle")
 	@ApiOperation("根据id查询文章")
-	public String findById(int id,HttpServletRequest request){
+	public String toArticle(int id,HttpServletRequest request){
 		String message = null;
 		try {
 			Article article = articleService.findById(id);
@@ -98,7 +104,7 @@ public class ArticleController {
 				ac.setWords(article.getWords());
 			ac.setCategoryName(name);
 			//传递章节信息
-			List<Chapter> chapterList = chapterService.findAllChapterById(article.getId());
+			List<Chapter> chapterList = chapterService.findByArticleId(article.getId());
 			request.setAttribute("chapterList", chapterList);
 			//传递最新章节信息
 			List<Chapter> updateList = chapterService.findUpdateChapter(article.getId());
@@ -115,9 +121,38 @@ public class ArticleController {
 		
 		return "foreground/article";
 	}
+	
+	@RequestMapping("/background/article/findById/{id}")
+	@ApiOperation("根据id查询文章")
+	@ResponseBody
+	public ArticleAndCategoryName findById(@PathVariable int id){
+		try {
+			Article article = articleService.findById(id);
+			String name = categoryService.findNameById(article.getCategory_id());
+			ArticleAndCategoryName ac = new ArticleAndCategoryName();
+			//封装
+			ac.setId(article.getId());
+			ac.setAuthor(article.getAuthor());
+			ac.setClickTimes(article.getClickTimes());
+			ac.setIntro(article.getIntro());
+			ac.setUpdateDate(article.getUpdateDate().toString().replace(".0", ""));
+			ac.setTitle(article.getTitle());
+			ac.setState(article.getState());
+			ac.setImage(article.getImage());
+			//words字段处理
+				ac.setWords(article.getWords());
+			ac.setCategoryName(name);
+			
+			return ac;
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+		
+	}
 	@ApiOperation("查询所有文章")
-	@RequestMapping("/article/findAll")
-	public Message<List<ArticleAndCategoryName>> findAll(){
+	@RequestMapping("/background/article/findAll")
+	public String findAll(HttpServletRequest request){
 		List<Article> list = articleService.findAll();
 		List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
 		for(Article article:list) {
@@ -127,19 +162,19 @@ public class ArticleController {
 					article.getTitle(),article.getState(),article.getWords(), article.getImage(),categoryName);
 			aclist.add(ac);
 		}
-		return MessageUtil.success(aclist);
+		request.setAttribute("articleList", aclist);
+		return "background/article";
 	}
-	@DeleteMapping("/article/deleteById")
+	@RequestMapping("/background/article/deleteById/{id}")
 	@ApiOperation("根据id删除文章")
-	@ApiImplicitParam(name="id",value="文章id",paramType="query",dataType="int",required=true)
-	public Message<String> deleteById(Integer id){
-		Message<String> message = null;
+	@ResponseBody
+	public String deleteById(@PathVariable Integer id){
+		String message = null;
 		try {
 			articleService.deleteById(id);
-			message = MessageUtil.success("delete success");
+			message = "删除成功";
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			message = MessageUtil.error(500, e.getMessage());
+			message = e.getMessage();
 		}
 		return message;
 	}
@@ -161,7 +196,7 @@ public class ArticleController {
 	}
 	@RequestMapping("/foreground/toCategory")
 	@ApiOperation("查找该栏目的所有文章")
-	public String findByCategoryId(Integer categoryId,HttpServletRequest request){
+	public String toCategory(Integer categoryId,HttpServletRequest request){
 		List<Article> list = articleService.findByCategory(categoryId);
 		List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
 		for(Article article:list) {
@@ -173,6 +208,22 @@ public class ArticleController {
 		request.setAttribute("articleList", aclist);
 		return "foreground/category";
 	}
+	
+	@RequestMapping(value="/background/article/findByCategoryId/{categoryId}")
+	@ApiOperation("查找该栏目的所有文章")
+	public String findByCategoryId(@PathVariable Integer categoryId,HttpServletRequest request){
+		List<Article> list = articleService.findByCategory(categoryId);
+		List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
+		for(Article article:list) {
+			ArticleAndCategoryName ac = new ArticleAndCategoryName(article.getId(), article.getAuthor(), article.getClickTimes(), 
+					article.getIntro(), article.getUpdateDate().toString().replace(".0", ""), 
+					article.getTitle(),article.getState(),article.getWords(),article.getImage(), categoryService.findNameById(article.getCategory_id()));
+			aclist.add(ac);
+		}
+		request.setAttribute("articleList", aclist);
+		return "background/article";
+	}
+	
 	@RequestMapping("/foreground/toStack")
 	@ApiOperation("查找本网站的所有文章并分类")
 	public String findAllByCategory(HttpServletRequest request){

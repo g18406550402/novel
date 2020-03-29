@@ -1,20 +1,27 @@
 package com.briup.buke.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.briup.buke.bean.Article;
 import com.briup.buke.bean.Category;
 import com.briup.buke.bean.Chapter;
+import com.briup.buke.bean.ChapterPack;
 import com.briup.buke.service.IArticleService;
 import com.briup.buke.service.ICategoryService;
 import com.briup.buke.service.IChapterService;
@@ -34,21 +41,51 @@ public class ChapterController {
 	private IArticleService articleService;
 	@Autowired
 	private ICategoryService categoryService;
-	@PostMapping("/chapter/saveOrUpdate")
+	
+	@ResponseBody
+	@RequestMapping(value="/background/chapter/saveOrUpdate",method=RequestMethod.POST)
 	@ApiOperation("更新或插入章节")
-	public Message<String> saveOrUpdate(Chapter chapter){
+	public String saveOrUpdate(Chapter chapter){
 		try {
 			chapterService.saveOrUpdate(chapter);
-			return MessageUtil.success("更新成功！");
+			return "更新成功！";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			return MessageUtil.error(500, e.getMessage());
+			return  e.getMessage();
 		}
 	}
+	@RequestMapping("/background/chapter/findAll")
+	public String findAll(HttpServletRequest request) {
+		List<ChapterPack> cpList = new ArrayList<>();
+		List<Chapter> chapterList = chapterService.findAll();
+		for(Chapter chapter:chapterList) {
+			String articleTitle = articleService.findArticleNameByArticleId(chapter.getArticleId());
+			ChapterPack cp = new ChapterPack(chapter.getId(), chapter.getSubtitle(), chapter.getContent(), chapter.getArticleId(), articleTitle);
+			cpList.add(cp);
+		}
+		List<Article> articleList = articleService.findAll();
+		request.setAttribute("articleList",articleList);
+		request.setAttribute("chapterList", cpList);
+		return "background/chapter";
+	}
 	
+	@RequestMapping("/background/chapter/findById/{id}")
+	@ResponseBody
+	public ChapterPack findById(@PathVariable Integer id) {
+		try {
+			Chapter chapter = chapterService.findById(id);
+			String articleTitle = articleService.findArticleNameByArticleId(chapter.getArticleId());
+			ChapterPack cp = new ChapterPack(chapter.getId(), chapter.getSubtitle(), chapter.getContent(), chapter.getArticleId(), articleTitle);
+			return cp;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+	}
 	@GetMapping("/foreground/toChapter")
 	@ApiOperation("根据id查找章节")
-	public String findById(Integer id,HttpServletRequest request){
+	public String toChapter(Integer id,HttpServletRequest request){
 		try {
 			Chapter chapter = chapterService.findById(id);
 			String articleName = articleService.findArticleNameByArticleId(chapter.getArticleId());
@@ -75,23 +112,31 @@ public class ChapterController {
 		}
 	}
 	
-	@DeleteMapping("/chapter/deleteById")
+	@RequestMapping("/background/chapter/deleteById/{id}")
 	@ApiOperation("根据id删除章节")
-	@ApiImplicitParam(name="id",value="章节id",paramType="query",dataType="int",required=true)
-	public Message<String> deleteById(Integer id){
+	@ResponseBody
+	public String deleteById(@PathVariable Integer id){
 		try {
 			chapterService.deleteById(id);
-			return MessageUtil.success("删除成功！");
+			return "删除成功！";
 		} catch (Exception e) {
-			return MessageUtil.error(500, e.getMessage());
+			return e.getMessage();
 		}
 	}
 	
 	@ApiOperation("根据文章ID查询文章所有章节")
-	@GetMapping("/chapter/findAllChapterById")
-	@ApiImplicitParam(name="article_id",value="文章id",paramType="query",dataType="int",required=true)
-	public Message<List<Chapter>> findAllChapter(Integer article_id){
-		List<Chapter> chapterList = chapterService.findAllChapterById(article_id);
-		return MessageUtil.success(chapterList);
+	@RequestMapping("/background/chapter/findByArticleId/{articleId}")
+	public String findByArticleId(@PathVariable Integer articleId,HttpServletRequest request){
+		List<ChapterPack> cpList = new ArrayList<>();
+		List<Chapter> chapterList = chapterService.findByArticleId(articleId);
+		for(Chapter chapter:chapterList) {
+			String articleTitle = articleService.findArticleNameByArticleId(chapter.getArticleId());
+			ChapterPack cp = new ChapterPack(chapter.getId(), chapter.getSubtitle(), chapter.getContent(), chapter.getArticleId(), articleTitle);
+			cpList.add(cp);
+		}
+		List<Article> articleList = articleService.findAll();
+		request.setAttribute("articleList",articleList);
+		request.setAttribute("chapterList", cpList);
+		return "background/chapter";
 	}
 }

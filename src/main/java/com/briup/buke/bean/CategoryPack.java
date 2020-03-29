@@ -9,13 +9,13 @@ public class CategoryPack {
 	@ApiModelProperty(value="栏目id")
 	private Integer id;
 	@ApiModelProperty(value="栏目代码")
-	private long code;
+	private Long code;
 	@ApiModelProperty(value="栏目名")
 	@Column(unique=true)
 	private String name;
 	
 	
-	public CategoryPack(Integer id, long code, String name) {
+	public CategoryPack(Integer id, Long code, String name) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -30,10 +30,10 @@ public class CategoryPack {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public long getCode() {
+	public Long getCode() {
 		return code;
 	}
-	public void setCode(long code) {
+	public void setCode(Long code) {
 		this.code = code;
 	}
 	public String getName() {

@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.buke.bean.Article;
@@ -32,7 +35,8 @@ import io.swagger.annotations.ApiOperation;
 public class CategoryController {
 	@Autowired
 	private ICategoryService categoryService;
-	@GetMapping("/background/findAllCategory")
+	
+	@RequestMapping("/background/category/findAll")
 	@ApiOperation("查询所有栏目")
 	public String findAll(HttpServletRequest request){
 		List<Category> categoryList = categoryService.findAll();
@@ -44,41 +48,42 @@ public class CategoryController {
 		request.setAttribute("categoryList", categoryPackList);
 		return "background/category";
 	}
-	@DeleteMapping("/category/deleteById")
+	@RequestMapping("/background/category/deleteById/{id}")
 	@ApiOperation("根据id删除栏目")
-	@ApiImplicitParam(name="id",value="栏目id",paramType="query",dataType="int",required=true)
-	public Message<String> deleteById(int id){
-		Message<String> message = null;
+	@ResponseBody
+	public String deleteById(@PathVariable int id){
+		String message = null;
 		try {
 			categoryService.deleteById(id);
-			message = MessageUtil.success("删除成功！");
+			message = "删除成功！";
 		} catch (Exception e) {
-			message = MessageUtil.error(500, e.getMessage());
+			message = e.getMessage();
 		}
 		return message;
 	}
-	@PutMapping("/category/saveOrUpdate")
-	@ApiOperation("保存或更新一个栏目")
 	
-	public Message<String> saveOrUpdate(CategoryPack categoryPack){
-		Message<String> message = null;
+	@ResponseBody
+	@RequestMapping(value="/background/category/saveOrUpdate",method=RequestMethod.POST)
+	@ApiOperation("保存或更新一个栏目")
+	public String saveOrUpdate(CategoryPack categoryPack){
+		String message = null;
 		Category category = new Category();
 		category.setId(categoryPack.getId());
 		category.setCode(categoryPack.getCode());
 		category.setName(categoryPack.getName());
 		try {
 			categoryService.saveOrUpdate(category);
-			message = MessageUtil.success("保存成功");
+			message = "保存成功";
 		} catch (Exception e) {
-			message = MessageUtil.error(500, e.getMessage());
+			message = e.getMessage();
 		}
 		return message;
 	}
-	@GetMapping("/category/findById")
+	@RequestMapping("/background/category/findById/{id}")
 	@ApiOperation("根据id查询栏目")
-	@ApiImplicitParam(name="id",paramType="query",dataType="int",required=true)
-	public Message<CategoryPack> findById(int id){
-		Message<CategoryPack> message = null;
+	@ResponseBody
+	public CategoryPack findById(@PathVariable int id){
+		CategoryPack message = null;
 		try {
 			Category category = categoryService.findById(id);
 			System.out.println(category);
@@ -86,12 +91,11 @@ public class CategoryController {
 			cp.setId(category.getId());
 			cp.setName(category.getName());
 			cp.setCode(category.getCode());
-			message = MessageUtil.success(cp);
+			message = cp;
+			return message;
 		} catch (Exception e) {
-			message = MessageUtil.error(500, e.getMessage());
+			return null;
 		}
-		
-		return message;
 	}
 }
 

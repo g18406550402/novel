@@ -72,14 +72,20 @@ public class ChapterServiceImpl implements IChapterService {
 	}
 	
 	@Override
-	public List<Chapter> findAllChapterById(Integer article_id) {
-		List<Chapter> chapList = chapterDao.findAllChapterByArticleId(article_id);
+	public List<Chapter> findByArticleId(Integer article_id) {
+		List<Chapter> chapList = chapterDao.findByArticleId(article_id);
 		return chapList;
 	}
 
 	@Override
 	public List<Chapter> findUpdateChapter(Integer id) {
 		List<Chapter> chapterList = chapterDao.findUpdateChapter(id);
+		return chapterList;
+	}
+
+	@Override
+	public List<Chapter> findAll() {
+		List<Chapter> chapterList = chapterDao.findAll();
 		return chapterList;
 	}
 

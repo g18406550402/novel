@@ -13,7 +13,9 @@ public interface IChapterService {
 	
 	public Chapter findById(Integer id)throws Exception;
 	
-	public List<Chapter> findAllChapterById(Integer article_id);
+	public List<Chapter> findByArticleId(Integer article_id);
 	
 	public List<Chapter> findUpdateChapter(Integer id);
+	
+	public List<Chapter> findAll();
 }

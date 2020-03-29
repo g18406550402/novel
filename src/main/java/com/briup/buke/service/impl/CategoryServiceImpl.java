@@ -43,10 +43,10 @@ public class CategoryServiceImpl implements ICategoryService{
 				Category category_db = categoryDao.findById(id).get();
 				String name = category.getName();
 				Long code = category.getCode();
-				if(name!=null) {
+				if(name!=null&&name!="") {
 					category_db.setName(name);
 				}
-				if(code!=0) {
+				if(code!=0&&code!=null) {
 					category_db.setCode(code);
 				}
 				categoryDao.save(category_db);
