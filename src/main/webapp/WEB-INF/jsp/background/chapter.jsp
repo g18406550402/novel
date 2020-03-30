@@ -83,6 +83,7 @@
 							</select>
 						</div>
 					</div>
+					<button type="reset"></button>
 				</form>
 				<div class="modal-footer">
 				    <button class="btn" style="background:#ccc">取消</button>
@@ -166,6 +167,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 			chapterContent = chapterContent.replace(RegExp("<p></p>","g"),'');
 			
 			let articleId = $("select[name=articleTitle] option:selected").val();
+			chapterId=null;
 			let data = {
 				id:chapterId,
 				subtitle:chapterSubtitle,

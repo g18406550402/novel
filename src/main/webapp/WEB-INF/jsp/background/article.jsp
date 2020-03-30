@@ -43,7 +43,7 @@
 			      <td>${article.title}</td>
 			      <td>${article.author}</td>
 			      <td>${article.state}</td>
-			      <td>${article.words}</td>
+			      <td>${article.words}万</td>
 			      <td>${article.categoryName}</td>
 			      <td class="test">	
 			      	<i value="${article.id}"class="layui-icon layui-icon-edit first" title="编辑文章信息"></i> 
@@ -99,7 +99,7 @@
 							<label>文章栏目:</label>
 							<select name="categoryName" id="" class="form-control">
 								<option value="">请选择所属栏目</option>
-						        <option value="奇幻玄幻">奇幻玄幻</option>
+						        <option value="玄幻奇幻">玄幻奇幻</option>
 						        <option value="言情浪漫">言情浪漫</option>
 						        <option value="青春校园">青春校园</option>
 						        <option value="武侠仙侠">武侠仙侠</option>
@@ -109,11 +109,13 @@
 							</select>
 						</div>
 					</div>
+					<button type="reset"></button>
 				</form>
 				<div class="modal-footer">
 				    <button class="btn" style="background:#ccc">取消</button>
 					<button class="btn" style="background:#ccc">保存</button>
 				</div>
+				
     </div>
   </div>
 </div>
@@ -178,7 +180,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 		})
 		// 新增模态框关闭
 		$('button:contains(取消)').on('click',function(){
-			$('button[type=reset]').trigger('click');
+			//$('button[type=reset]').trigger('click');
 				$('#toAdd').hide();
 		})
 		// 新增模态框保存
@@ -195,6 +197,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 			let articleState = $("input[name=articleState]").val();
 			let articleWords = $("input[name=articleWords]").val();
 			let categoryName = $("select[name=categoryName] option:selected").val();
+			articleId=null;
 			let data = {
 				id:articleId,
 				title:articleTitle,
@@ -213,7 +216,6 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 		// 显示编辑模态框
 		$('.first').click(function(){
 			articleId = $(this).attr("value");
-			alert(articleId);
 			let url = "/background/article/findById/"+articleId;
 			$.post(url,function(data){
 				console.log(data);

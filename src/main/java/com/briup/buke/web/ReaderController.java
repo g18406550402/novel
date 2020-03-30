@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,47 +33,49 @@ public class ReaderController {
 	@Autowired
 	private IReaderService readerService;
 	@ApiOperation("查询所有读者")
-	@GetMapping("/reader/findAll")
-	public Message<List<Reader>> findAll(){
+	@RequestMapping("/background/reader/findAll")
+	public String findAll(HttpServletRequest request){
 		List<Reader> readerList = readerService.findAll();
-		return MessageUtil.success(readerList);
+		request.setAttribute("readerList", readerList);
+		return "background/reader";
 	}
 	@ApiOperation("根据id查询读者")
-	@GetMapping("/reader/findById")
-	@ApiImplicitParam(name="id",value="读者id",paramType="query",dataType="int",required=true)
-	public Message<Reader> findById(Integer id){
+	@ResponseBody
+	@RequestMapping("/background/reader/findById/{id}")
+	public Reader findById(@PathVariable Integer id){
 		try {
 			Reader reader = readerService.findById(id);
-			return MessageUtil.success(reader);
+			return reader;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			return MessageUtil.error(500, e.getMessage());
+			return null;
 		}
 	}
 	
 	@ApiOperation("更新或保存读者信息")
-	@PutMapping("/reader/saveOrUpdate")
-	public Message<String> saveOrUpdate(ReaderPack readerPack){
+	@RequestMapping("/background/reader/saveOrUpdate")
+	@ResponseBody
+	public String saveOrUpdate(ReaderPack readerPack){
 		try {
 			Reader reader=new Reader(readerPack.getId(), readerPack.getUsername(), 
 					readerPack.getPassword(), readerPack.getEmail());
 			readerService.saveOrUpdate(reader);
-			return MessageUtil.success("更新成功");
+			return "更新成功";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			return MessageUtil.error(500, e.getMessage());
+			return e.getMessage();
 		}
 	}
 	@ApiOperation("根据id删除读者")
-	@DeleteMapping("/reader/deleteById")
-	@ApiImplicitParam(name="id",value="读者id",paramType="query",dataType="int",required=true)
-	public Message<String> deleteById(Integer id){
+	@RequestMapping("/background/reader/deleteById/{id}")
+	@ResponseBody
+	public String deleteById(@PathVariable Integer id){
 		try {
 			readerService.deleteById(id);
-			return MessageUtil.success("删除成功！");
+			return "删除成功！";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			return MessageUtil.error(500, e.getMessage());
+			return e.getMessage();
 		}
 	}
 	@ResponseBody
@@ -89,7 +92,7 @@ public class ReaderController {
 		readerService.addBookMark(reader_id, chapter_id);
 		return "添加成功！您可以前往阅读记录查看";
 	}
-	@PutMapping("/commentaryArticle")
+	@RequestMapping("/commentaryArticle")
 	public Message<String> commentaryArticle(String content,Integer article_id,Integer reader_id){
 		Comment comment = new Comment();
 		comment.setContent(content);

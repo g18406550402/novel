@@ -74,6 +74,7 @@
 							<input type="text" name="categoryName"  class="form-control">
 						</div>
 					</div>
+					<button type="reset"></button>
 				</form>
 				<div class="modal-footer">
 				    <button class="btn" style="background:#ccc">取消</button>
@@ -147,6 +148,7 @@
 		$('button:contains(保存)').on('click',function(){
 			let categoryName = $("input[name=categoryName]").val();
 			let categoryCode = $("input[name=categoryCode]").val();
+			categoryId=null;
 			let data = {
 				id:categoryId,
 				name:categoryName,

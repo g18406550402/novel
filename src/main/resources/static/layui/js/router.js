@@ -14,7 +14,7 @@ $(function(){
         
       }
       if(thisText=="读者信息查询"){
-        $('.layui-body').load('./pages/feedback.html');
+        $('.layui-body').load('http://localhost:8080/background/reader/findAll');
         
       }
        if(thisText=="角色管理"){
