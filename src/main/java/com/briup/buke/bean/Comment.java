@@ -19,23 +19,23 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@ApiModelProperty(value="评论ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="评论内容")
 	private String content;
 	@ApiModelProperty(value="评论发表日期",hidden=true)
 	@Column(name="publishDate")
 	private Date publishDate;
 	@Column(name="article_id")
-	private Integer articleId;
+	private Long articleId;
 	/*@Column(name="reader_id")
-	private Integer readerId;*/
+	private Long readerId;*/
 	public Comment() {
 		super();
 	}
 	
 	
 
-	public Comment(Integer id, String content, Date publishDate, Integer articleId) {
+	public Comment(Long id, String content, Date publishDate, Long articleId) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -45,10 +45,10 @@ public class Comment {
 
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getContent() {
@@ -65,18 +65,18 @@ public class Comment {
 	}
 	
 	
-	public Integer getArticleId() {
+	public Long getArticleId() {
 		return articleId;
 	}
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
 	}
 	
-	/*public Integer getReaderId() {
+	/*public Long getReaderId() {
 		return readerId;
 	}
 
-	public void setReaderId(Integer readerId) {
+	public void setReaderId(Long readerId) {
 		this.readerId = readerId;
 	}*/
 

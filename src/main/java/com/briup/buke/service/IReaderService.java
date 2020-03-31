@@ -8,17 +8,17 @@ import com.briup.buke.bean.Reader;
 public interface IReaderService {
 	public List<Reader> findAll();
 	
-	public Reader findById(Integer id)throws Exception;
+	public Reader findById(Long id)throws Exception;
 	
 	public void saveOrUpdate(Reader reader)throws Exception;
 	
-	public void deleteById(Integer id)throws Exception;
+	public void deleteById(Long id)throws Exception;
 	
-	public void addToBookShelf (Integer reader_id,Integer article_id);
+	public void addToBookShelf (Long reader_id,Long article_id);
 	
-	public void addBookMark(Integer reader_id,Integer chapter_id);
+	public void addBookMark(Long reader_id,Long chapter_id);
 	
-	public void commentaryArticle(Integer reader_id,Comment comment);
+	public void commentaryArticle(Long reader_id,Comment comment);
 	
 	public Reader login(String username,String password) throws Exception;
 }

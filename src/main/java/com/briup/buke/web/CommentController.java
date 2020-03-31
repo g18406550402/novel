@@ -35,7 +35,7 @@ public class CommentController {
 	@GetMapping("/findById")
 	@ApiOperation("根据id查找评论")
 	@ApiImplicitParam(name="id",value="评论id",paramType="query",dataType="int",required=true)
-	public Message<Comment> findById(Integer id){
+	public Message<Comment> findById(Long id){
 		try {
 			Comment comment = commentService.findById(id);
 			return MessageUtil.success(comment);
@@ -47,7 +47,7 @@ public class CommentController {
 	@DeleteMapping("/deleteById")
 	@ApiOperation("根据id删除评论")
 	@ApiImplicitParam(name="id",value="评论id",paramType="query",dataType="int",required=true)
-	public Message<String> deleteById(Integer id){
+	public Message<String> deleteById(Long id){
 		try {
 			commentService.deleteById(id);
 			return MessageUtil.success("删除成功");
@@ -71,7 +71,7 @@ public class CommentController {
 	@GetMapping("/findCommentByArticleId")
 	@ApiOperation("根据文章id查找评论")
 	@ApiImplicitParam(name="article_id",value="文章id",paramType="query",dataType="int",required=true)
-	public Message<List<Comment>> findCommentByArticleId(Integer article_id){
+	public Message<List<Comment>> findCommentByArticleId(Long article_id){
 		List<Comment> commentList = commentService.findCommentByArticleId(article_id);
 		return MessageUtil.success(commentList);
 	}

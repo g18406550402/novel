@@ -48,11 +48,11 @@ public class ArticleController {
 	public String saveOrUpdate(ArticleAndCategoryName articleAndCategoryName){
 		//封装文章信息
 		Article article = new Article();
-		Integer id = articleAndCategoryName.getId();
+		Long id = articleAndCategoryName.getId();
 		String title = articleAndCategoryName.getTitle();
 		String author = articleAndCategoryName.getAuthor();
 		String intro = articleAndCategoryName.getIntro();
-		Integer words = articleAndCategoryName.getWords();
+		Long words = articleAndCategoryName.getWords();
 		String state = articleAndCategoryName.getState();
 		String image = articleAndCategoryName.getImage();
 		article.setId(id);
@@ -63,7 +63,7 @@ public class ArticleController {
 		article.setState(state);
 		article.setImage(image);
 		article.setUpdateDate(new Date());
-		Integer categoryId=null;
+		Long categoryId=null;
 		try {
 			//根据输入的栏目名查找栏目id
 			String categoryName = articleAndCategoryName.getCategoryName();
@@ -85,7 +85,7 @@ public class ArticleController {
 	
 	@RequestMapping("/foreground/toArticle")
 	@ApiOperation("根据id查询文章")
-	public String toArticle(int id,HttpServletRequest request){
+	public String toArticle(Long id,HttpServletRequest request){
 		String message = null;
 		try {
 			Article article = articleService.findById(id);
@@ -106,6 +106,7 @@ public class ArticleController {
 			//传递章节信息
 			List<Chapter> chapterList = chapterService.findByArticleId(article.getId());
 			request.setAttribute("chapterList", chapterList);
+			System.out.println(chapterList);
 			//传递最新章节信息
 			List<Chapter> updateList = chapterService.findUpdateChapter(article.getId());
 			request.setAttribute("updateList", updateList);
@@ -125,7 +126,7 @@ public class ArticleController {
 	@RequestMapping("/background/article/findById/{id}")
 	@ApiOperation("根据id查询文章")
 	@ResponseBody
-	public ArticleAndCategoryName findById(@PathVariable int id){
+	public ArticleAndCategoryName findById(@PathVariable Long id){
 		try {
 			Article article = articleService.findById(id);
 			String name = categoryService.findNameById(article.getCategory_id());
@@ -168,7 +169,7 @@ public class ArticleController {
 	@RequestMapping("/background/article/deleteById/{id}")
 	@ApiOperation("根据id删除文章")
 	@ResponseBody
-	public String deleteById(@PathVariable Integer id){
+	public String deleteById(@PathVariable Long id){
 		String message = null;
 		try {
 			articleService.deleteById(id);
@@ -196,8 +197,8 @@ public class ArticleController {
 	}
 	@RequestMapping("/foreground/toCategory")
 	@ApiOperation("查找该栏目的所有文章")
-	public String toCategory(Integer categoryId,HttpServletRequest request){
-		List<Article> list = articleService.findByCategory(categoryId);
+	public String toCategory(Long categoryId,HttpServletRequest request){
+		List<Article> list = articleService.findArticleByCategoryId(categoryId);
 		List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
 		for(Article article:list) {
 			ArticleAndCategoryName ac = new ArticleAndCategoryName(article.getId(), article.getAuthor(), article.getClickTimes(), 
@@ -211,8 +212,8 @@ public class ArticleController {
 	
 	@RequestMapping(value="/background/article/findByCategoryId/{categoryId}")
 	@ApiOperation("查找该栏目的所有文章")
-	public String findByCategoryId(@PathVariable Integer categoryId,HttpServletRequest request){
-		List<Article> list = articleService.findByCategory(categoryId);
+	public String findByCategoryId(@PathVariable Long categoryId,HttpServletRequest request){
+		List<Article> list = articleService.findArticleByCategoryId(categoryId);
 		List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
 		for(Article article:list) {
 			ArticleAndCategoryName ac = new ArticleAndCategoryName(article.getId(), article.getAuthor(), article.getClickTimes(), 
@@ -227,8 +228,8 @@ public class ArticleController {
 	@RequestMapping("/foreground/toStack")
 	@ApiOperation("查找本网站的所有文章并分类")
 	public String findAllByCategory(HttpServletRequest request){
-		for(int i=1;i<=7;i++) {
-			List<Article> list = articleService.findByCategory(i);
+		for(Long i=1l;i<=7;i++) {
+			List<Article> list = articleService.findArticleByCategoryId(i);
 			List<ArticleAndCategoryName> aclist=new ArrayList<ArticleAndCategoryName>();
 			for(Article article:list) {
 				ArticleAndCategoryName ac = new ArticleAndCategoryName(article.getId(), article.getAuthor(), article.getClickTimes(), 

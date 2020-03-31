@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.briup.buke.bean.Reader;
 
-public interface ReaderDao extends JpaRepository<Reader, Integer> {
+public interface ReaderDao extends JpaRepository<Reader, Long> {
 	@Query(value="select * from book_reader c where c.username=?1",nativeQuery=true)
 	public Reader findByUsername(String username);
 }

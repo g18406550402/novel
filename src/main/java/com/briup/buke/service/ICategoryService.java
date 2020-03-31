@@ -10,16 +10,16 @@ public interface ICategoryService {
 	
 	public List<Category> findAll();
 	
-	public void deleteById(int id)throws Exception;
+	public void deleteById(Long id)throws Exception;
 	
 	public void saveOrUpdate(Category category)throws Exception;
 	
-	public Category findById(int id)throws Exception;
+	public Category findById(Long id)throws Exception;
 	
-	public Integer findIdByName(String name)throws Exception;
+	public Long findIdByName(String name)throws Exception;
 	
 	
 	
-	public String findNameById(Integer id);
+	public String findNameById(Long id);
 	
 }

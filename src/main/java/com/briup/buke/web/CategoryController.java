@@ -51,7 +51,7 @@ public class CategoryController {
 	@RequestMapping("/background/category/deleteById/{id}")
 	@ApiOperation("根据id删除栏目")
 	@ResponseBody
-	public String deleteById(@PathVariable int id){
+	public String deleteById(@PathVariable Long id){
 		String message = null;
 		try {
 			categoryService.deleteById(id);
@@ -82,7 +82,7 @@ public class CategoryController {
 	@RequestMapping("/background/category/findById/{id}")
 	@ApiOperation("根据id查询栏目")
 	@ResponseBody
-	public CategoryPack findById(@PathVariable int id){
+	public CategoryPack findById(@PathVariable Long id){
 		CategoryPack message = null;
 		try {
 			Category category = categoryService.findById(id);

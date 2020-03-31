@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 @Api
 public class CategoryPack {
 	@ApiModelProperty(value="栏目id")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="栏目代码")
 	private Long code;
 	@ApiModelProperty(value="栏目名")
@@ -15,7 +15,7 @@ public class CategoryPack {
 	private String name;
 	
 	
-	public CategoryPack(Integer id, Long code, String name) {
+	public CategoryPack(Long id, Long code, String name) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -24,10 +24,10 @@ public class CategoryPack {
 	}
 	public CategoryPack() {
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Long getCode() {

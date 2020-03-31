@@ -42,7 +42,7 @@ public class ReaderController {
 	@ApiOperation("根据id查询读者")
 	@ResponseBody
 	@RequestMapping("/background/reader/findById/{id}")
-	public Reader findById(@PathVariable Integer id){
+	public Reader findById(@PathVariable Long id){
 		try {
 			Reader reader = readerService.findById(id);
 			return reader;
@@ -69,7 +69,7 @@ public class ReaderController {
 	@ApiOperation("根据id删除读者")
 	@RequestMapping("/background/reader/deleteById/{id}")
 	@ResponseBody
-	public String deleteById(@PathVariable Integer id){
+	public String deleteById(@PathVariable Long id){
 		try {
 			readerService.deleteById(id);
 			return "删除成功！";
@@ -81,19 +81,19 @@ public class ReaderController {
 	@ResponseBody
 	@RequestMapping("/foreground/addToBookShelf")
 	@ApiOperation("添加书籍到我的书架")
-	public String addToBookShelf(Integer reader_id,Integer article_id){
+	public String addToBookShelf(Long reader_id,Long article_id){
 		readerService.addToBookShelf(reader_id, article_id);
 		return "添加成功！您可以前往我的书架查看";
 	}
 	@ResponseBody
 	@RequestMapping("/foreground/addBookMark")
 	@ApiOperation("添加书签")
-	public String addBookMark(Integer reader_id,Integer chapter_id){
+	public String addBookMark(Long reader_id,Long chapter_id){
 		readerService.addBookMark(reader_id, chapter_id);
 		return "添加成功！您可以前往阅读记录查看";
 	}
 	@RequestMapping("/commentaryArticle")
-	public Message<String> commentaryArticle(String content,Integer article_id,Integer reader_id){
+	public Message<String> commentaryArticle(String content,Long article_id,Long reader_id){
 		Comment comment = new Comment();
 		comment.setContent(content);
 		comment.setArticleId(article_id);

@@ -26,7 +26,7 @@ public class Reader {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@ApiModelProperty(value="读者ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="读者标识名")
 	private String username;
 	@ApiModelProperty(value="读者密码")
@@ -48,7 +48,7 @@ public class Reader {
 	@JoinTable(name = "reader_comment",joinColumns = @JoinColumn(name="reader_id"),
 			inverseJoinColumns = @JoinColumn(name="comment_id"))
 	private Set<Comment> comments;
-	public Reader(Integer id, String username, String password, String email) {
+	public Reader(Long id, String username, String password, String email) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -58,10 +58,10 @@ public class Reader {
 	public Reader() {
 		super();
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {

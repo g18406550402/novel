@@ -42,7 +42,7 @@ public class LinkController {
 	@ApiImplicitParam(name="id",value="链接ID",paramType="query",dataType="int",required=true)
 	@ApiOperation("根据id查询Link")
 	
-	public Message<Link> findById(Integer id){
+	public Message<Link> findById(Long id){
 		
 			Link link = linkService.findById(id);
 			return MessageUtil.success(link);
@@ -51,7 +51,7 @@ public class LinkController {
 	@DeleteMapping("/deleteById")
 	@ApiOperation("根据id删除一个链接")
 	@ApiImplicitParam(name="id",value="链接ID",paramType="query",dataType="int",required=true)
-	public Message<String> deleteById(Integer id){
+	public Message<String> deleteById(Long id){
 		Message<String> message=null;
 		try {
 			linkService.deleteById(id);

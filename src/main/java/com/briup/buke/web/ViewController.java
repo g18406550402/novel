@@ -15,7 +15,7 @@ public class ViewController {
 	@Autowired
 	private IReaderService readerService;
 	//跳转到首页
-	@RequestMapping("/foreground/index")
+	@RequestMapping("/foreground/toIndex")
 	public String toForegroundIndex() {
 		return "foreground/index";
 	}
@@ -27,7 +27,7 @@ public class ViewController {
 	}
 	//跳转到我的书架
 	@RequestMapping("/foreground/bookshelf")
-	public String toBookShelf(int reader_id,HttpSession session) {
+	public String toBookShelf(Long reader_id,HttpSession session) {
 		try {
 			Reader reader = readerService.findById(reader_id);
 			session.setAttribute("reader", reader);
@@ -39,7 +39,7 @@ public class ViewController {
 	}
 	//跳转到阅读记录
 	@RequestMapping("/foreground/bookmark")
-	public String toBookMark(int reader_id,HttpSession session) {
+	public String toBookMark(Long reader_id,HttpSession session) {
 		try {
 			Reader reader = readerService.findById(reader_id);
 			session.setAttribute("reader", reader);

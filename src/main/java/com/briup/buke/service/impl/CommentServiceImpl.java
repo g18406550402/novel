@@ -21,7 +21,7 @@ public class CommentServiceImpl implements ICommentService{
 	}
 
 	@Override
-	public Comment findById(Integer id) throws Exception {
+	public Comment findById(Long id) throws Exception {
 		Optional<Comment> opt = commentDao.findById(id);
 		Comment comment = opt.isPresent()?opt.get():null;
 		if(comment!=null) {
@@ -34,13 +34,13 @@ public class CommentServiceImpl implements ICommentService{
 	@Override
 	public void saveOrUpdate(Comment comment) throws Exception {
 		if(comment!=null) {
-			Integer id = comment.getId();
+			Long id = comment.getId();
 			if(id==null) {
 				commentDao.save(comment);
 			}else {
 				Comment comment_db = commentDao.findById(id).get();
 				String content = comment.getContent();
-				Integer articleId = comment.getArticleId();
+				Long articleId = comment.getArticleId();
 				Date publishDate = comment.getPublishDate();
 				if(content!=null)
 					comment_db.setContent(content);
@@ -58,7 +58,7 @@ public class CommentServiceImpl implements ICommentService{
 	}
 
 	@Override
-	public void deleteById(Integer id) throws Exception {
+	public void deleteById(Long id) throws Exception {
 		Optional<Comment> opt = commentDao.findById(id);
 		Comment comment = opt.isPresent()?opt.get():null;
 		if(comment!=null) {
@@ -70,7 +70,7 @@ public class CommentServiceImpl implements ICommentService{
 	}
 
 	@Override
-	public List<Comment> findCommentByArticleId(Integer id)  {
+	public List<Comment> findCommentByArticleId(Long id)  {
 		List<Comment> commentList = commentDao.findCommentByArticleId(id);
 		
 		return commentList;

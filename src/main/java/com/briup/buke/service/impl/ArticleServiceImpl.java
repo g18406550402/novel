@@ -14,7 +14,7 @@ public class ArticleServiceImpl implements IArticleService{
 	@Autowired
 	private ArticleDao articleDao;
 	@Override
-	public Article findById(int id) throws Exception {
+	public Article findById(Long id) throws Exception {
 		Optional<Article> opt = articleDao.findById(id);
 		Article article = opt.isPresent()?opt.get():null;
 		if(article!=null) {
@@ -30,9 +30,9 @@ public class ArticleServiceImpl implements IArticleService{
 	@Override
 	public void saveOrUpdate(Article article) throws Exception {
 		if(article!=null) {
-			Integer id = article.getId();
+			Long id = article.getId();
 			if(id==null) {
-				article.setClickTimes(0);
+				article.setClickTimes(0l);
 				articleDao.save(article);
 			}else {
 				//根据id查出文章
@@ -40,9 +40,9 @@ public class ArticleServiceImpl implements IArticleService{
 				//更改标题作者栏目字数状态
 				String author = article.getAuthor();
 				String title = article.getTitle();
-				Integer category_id = article.getCategory_id();
+				Long category_id = article.getCategory_id();
 				String intro = article.getIntro();
-				Integer words = article.getWords();
+				Long words = article.getWords();
 				String state = article.getState();
 				String image = article.getImage();
 				if((author!=null)&&(author!="")) 
@@ -71,7 +71,7 @@ public class ArticleServiceImpl implements IArticleService{
 		return list;
 	}
 	@Override
-	public void deleteById(Integer id) throws Exception {
+	public void deleteById(Long id) throws Exception {
 		Optional<Article> opt = articleDao.findById(id);
 		Article article = opt.isPresent()?opt.get():null;
 		if(article!=null) {
@@ -83,9 +83,9 @@ public class ArticleServiceImpl implements IArticleService{
 		}
 	}
 	@Override
-	public Integer findCategoryIdById(Integer id) {
-		articleDao.findCategoryIdById(id);
-		return id;
+	public Long findCategoryIdByArticleId(Long id) {
+		Long categoryId = articleDao.findCategoryIdByArticleId(id);
+		return categoryId;
 	}
 	
 	@Override
@@ -95,12 +95,12 @@ public class ArticleServiceImpl implements IArticleService{
 	}
 	
 	@Override
-	public List<Article> findByCategory(Integer categoryId) {
+	public List<Article> findArticleByCategoryId(Long categoryId) {
 		List<Article> articleList = articleDao.findByCategory(categoryId);
 		return articleList;
 	}
 	@Override
-	public String findArticleNameByArticleId(Integer id) {
+	public String findArticleNameByArticleId(Long id) {
 		String articleName = articleDao.findArticleNameByArticleId(id);
 		return articleName;
 	}

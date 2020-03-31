@@ -146,6 +146,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 		let readerId;
 		// 点击新增显示模态框
 		$('#add').click(function(){
+			readerId=null;
 			$('#toAdd').show();
 		})
 		// 新增模态框关闭
@@ -159,7 +160,6 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 			let readerUsername = $("input[name=readerUsername]").val();
 			let readerPassword = $("input[name=readerPassword]").val();
 			let readerEmail = $("input[name=readerEmail]").val();
-			readerId=null;
 			let data = {
 				id:readerId,
 				username:readerUsername,

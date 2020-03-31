@@ -134,7 +134,7 @@
 	<div class="top">
 		<div class="bar">
 			<div class="chepnav">
-				<i>当前位置:</i><a href="/foreground/index">铅笔小说</a>><a
+				<i>当前位置:</i><a href="/foreground/toIndex">铅笔小说</a>><a
 					href="/foreground/toCategory?id=${categoryId }">${categoryName }</a>><a
 					href="/foreground/toArticle?id=${articleId }">${articleName}</a>> <em>${chapter.subtitle }</em>
 			</div>
@@ -212,10 +212,10 @@
 		</div>
 	</div>
 	<p class="mlfy_page">
-		<a href="/foreground/toChapter?id=${preId }">上一章</a>
+		<a href="/foreground/toChapter/preId }">上一章</a>
 		<a href="/foreground/toArticle?id=${chapter.articleId }" rel="nofollow">目录</a>
 		<a href="javascript:void(0);" onclick="addBookMark()">+书签</a>
-		<a id="nextChapter" href="/foreground/toChapter?id=${nextId }">下一章</a>
+		<a id="nextChapter" href="/foreground/toChapter/${nextId }">下一章</a>
 	</p>
 	<div class="bd"></div>
 	<script>

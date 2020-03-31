@@ -137,6 +137,7 @@
 
 		// 点击新增显示模态框
 		$('#add').click(function(){
+			categoryId=null;
 			$('#toAdd').show();
 		})
 		// 新增模态框关闭
@@ -148,7 +149,6 @@
 		$('button:contains(保存)').on('click',function(){
 			let categoryName = $("input[name=categoryName]").val();
 			let categoryCode = $("input[name=categoryCode]").val();
-			categoryId=null;
 			let data = {
 				id:categoryId,
 				name:categoryName,
@@ -163,6 +163,7 @@
 		// 显示编辑模态框
 		$('.first').click(function(){
 			categoryId = $(this).attr("value");
+			console.log(categoryId)
 			let url = "/background/category/findById/"+categoryId;
 			$.post(url,function(data){
 				console.log(data);

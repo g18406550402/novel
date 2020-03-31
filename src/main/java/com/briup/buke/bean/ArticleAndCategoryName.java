@@ -9,11 +9,11 @@ import io.swagger.annotations.ApiModelProperty;
 public class ArticleAndCategoryName {
 	
 	@ApiModelProperty(value="文章ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="文章作者")
 	private String author;
 	@ApiModelProperty(value="文章点击次数",hidden=true)
-	private Integer clickTimes;
+	private Long clickTimes;
 	@ApiModelProperty(value="文章简介")
 	private String intro;
 	@ApiModelProperty(value="文章更新时间",hidden=true)
@@ -23,7 +23,7 @@ public class ArticleAndCategoryName {
 	@ApiModelProperty(value="文章状态")
 	private String state;
 	@ApiModelProperty(value="文章字数（万字）")
-	private Integer words;
+	private Long words;
 	@ApiModelProperty(value="文章图片URL")
 	private String image;
 	@ApiModelProperty(value="文章所在栏目")
@@ -31,8 +31,8 @@ public class ArticleAndCategoryName {
 	public ArticleAndCategoryName() {
 	}
 
-	public ArticleAndCategoryName(Integer id, String author, Integer clickTimes, String intro, String updateDate,
-			String title, String state, Integer words, String image,String categoryName) {
+	public ArticleAndCategoryName(Long id, String author, Long clickTimes, String intro, String updateDate,
+			String title, String state, Long words, String image,String categoryName) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -46,10 +46,10 @@ public class ArticleAndCategoryName {
 		this.categoryName = categoryName;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getAuthor() {
@@ -58,10 +58,10 @@ public class ArticleAndCategoryName {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Integer getClickTimes() {
+	public Long getClickTimes() {
 		return clickTimes;
 	}
-	public void setClickTimes(Integer clickTimes) {
+	public void setClickTimes(Long clickTimes) {
 		this.clickTimes = clickTimes;
 	}
 	
@@ -105,11 +105,11 @@ public class ArticleAndCategoryName {
 		this.state = state;
 	}
 
-	public Integer getWords() {
+	public Long getWords() {
 		return words;
 	}
 
-	public void setWords(Integer words) {
+	public void setWords(Long words) {
 		this.words = words;
 	}
 

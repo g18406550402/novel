@@ -1,12 +1,12 @@
 package com.briup.buke.bean;
 
 public class ChapterPack {
-	private Integer id;
+	private Long id;
 	private String subtitle;
 	private String content;
-	private Integer articleId;
+	private Long articleId;
 	private String articleTitle;
-	public ChapterPack(Integer id, String subtitle, String content, Integer articleId, String articleTitle) {
+	public ChapterPack(Long id, String subtitle, String content, Long articleId, String articleTitle) {
 		super();
 		this.id = id;
 		this.subtitle = subtitle;
@@ -14,10 +14,10 @@ public class ChapterPack {
 		this.articleId = articleId;
 		this.articleTitle = articleTitle;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getSubtitle() {
@@ -32,10 +32,10 @@ public class ChapterPack {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getArticleId() {
+	public Long getArticleId() {
 		return articleId;
 	}
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
 	}
 	public String getArticleTitle() {

@@ -149,6 +149,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 		let chapterId;
 		// 点击新增显示模态框
 		$('#add').click(function(){
+			chapterId=null;
 			$('#toAdd').show();
 		})
 		// 新增模态框关闭
@@ -167,7 +168,6 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 			chapterContent = chapterContent.replace(RegExp("<p></p>","g"),'');
 			
 			let articleId = $("select[name=articleTitle] option:selected").val();
-			chapterId=null;
 			let data = {
 				id:chapterId,
 				subtitle:chapterSubtitle,

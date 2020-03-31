@@ -39,7 +39,7 @@ public class ReaderServiceImpl implements IReaderService{
 	}
 
 	@Override
-	public Reader findById(Integer id) throws Exception {
+	public Reader findById(Long id) throws Exception {
 		Optional<Reader> opt = readerDao.findById(id);
 		Reader reader = opt.isPresent()?opt.get():null;
 		if(reader!=null)
@@ -52,7 +52,7 @@ public class ReaderServiceImpl implements IReaderService{
 	@Override
 	public void saveOrUpdate(Reader reader) throws Exception {
 		if(reader!=null) {
-			Integer id = reader.getId();
+			Long id = reader.getId();
 			if(id==null) {
 				readerDao.save(reader);
 			}else {
@@ -75,7 +75,7 @@ public class ReaderServiceImpl implements IReaderService{
 	}
 
 	@Override
-	public void deleteById(Integer id) throws Exception {
+	public void deleteById(Long id) throws Exception {
 		Optional<Reader> opt = readerDao.findById(id);
 		Reader reader = opt.isPresent()?opt.get():null;
 		if(reader!=null) {
@@ -86,7 +86,7 @@ public class ReaderServiceImpl implements IReaderService{
 	}
 
 	@Override
-	public void addToBookShelf(Integer reader_id, Integer article_id) {
+	public void addToBookShelf(Long reader_id, Long article_id) {
 		Reader reader = readerDao.findById(reader_id).get();
 		Article article = articleDao.findById(article_id).get();
 		Set<Article> articleList = reader.getArticles();
@@ -96,7 +96,7 @@ public class ReaderServiceImpl implements IReaderService{
 	}
 
 	@Override
-	public void addBookMark(Integer reader_id, Integer chapter_id) {
+	public void addBookMark(Long reader_id, Long chapter_id) {
 		Reader reader = readerDao.findById(reader_id).get();
 		//添加书签
 		Chapter chapter = chapterDao.findById(chapter_id).get();
@@ -112,7 +112,7 @@ public class ReaderServiceImpl implements IReaderService{
 	}
 
 	@Override
-	public void commentaryArticle(Integer reader_id, Comment comment) {
+	public void commentaryArticle(Long reader_id, Comment comment) {
 		//根据id查出读者
 		Reader reader = readerDao.findById(reader_id).get();
 		//保存评论

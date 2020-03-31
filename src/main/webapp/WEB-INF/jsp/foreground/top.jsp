@@ -60,7 +60,7 @@
 		</div>
 		<div class="nav">
 			<ul>
-				<li><a id="shouye" href="/foreground/index">首页</a></li>
+				<li><a id="shouye" href="/foreground/toIndex">首页</a></li>
 				<li><a id="sort1" href="/foreground/toCategory?categoryId=1">玄幻奇幻</a></li>
 				<li><a id="sort2" href="/foreground/toCategory?categoryId=2">言情浪漫</a></li>
 				<li><a id="sort3" href="/foreground/toCategory?categoryId=3">青春校园</a></li>

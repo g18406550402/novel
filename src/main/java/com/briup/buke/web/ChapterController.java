@@ -71,7 +71,7 @@ public class ChapterController {
 	
 	@RequestMapping("/background/chapter/findById/{id}")
 	@ResponseBody
-	public ChapterPack findById(@PathVariable Integer id) {
+	public ChapterPack findById(@PathVariable Long id) {
 		try {
 			Chapter chapter = chapterService.findById(id);
 			String articleTitle = articleService.findArticleNameByArticleId(chapter.getArticleId());
@@ -83,39 +83,61 @@ public class ChapterController {
 		}
 		
 	}
-	@GetMapping("/foreground/toChapter")
+	
+	@RequestMapping("/test/toChapter/{id}")
+	@ResponseBody
+	public ChapterPack test(@PathVariable Long id) {
+		try {
+			Chapter chapter = chapterService.findById(id);
+			String articleTitle = articleService.findArticleNameByArticleId(chapter.getArticleId());
+			ChapterPack cp = new ChapterPack(chapter.getId(), chapter.getSubtitle(), chapter.getContent(), chapter.getArticleId(), articleTitle);
+			return cp;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
+	}
+	@RequestMapping("/foreground/toChapter/{id}")
 	@ApiOperation("根据id查找章节")
-	public String toChapter(Integer id,HttpServletRequest request){
+	public String toChapter(@PathVariable Long id,HttpServletRequest request){
 		try {
 			Chapter chapter = chapterService.findById(id);
 			String articleName = articleService.findArticleNameByArticleId(chapter.getArticleId());
-			int categoryId = articleService.findCategoryIdById(chapter.getArticleId());
+			System.out.println("articleId:"+chapter.getArticleId());
+			Long categoryId = articleService.findCategoryIdByArticleId(chapter.getArticleId());
+			//id大时出错
+			System.out.println("categoryId:"+categoryId);
+			System.out.println("id大时出错");
 			Category category = categoryService.findById(categoryId);
+			System.out.println("id大时没有出错");
 			//传递上一章下一章id
-			int nextId=++id;
-			int preId=--id;
+			Long nextId=++id;
+			Long preId=--id;
 			request.setAttribute("nextId",nextId);
 			request.setAttribute("preId",preId);
 			//传递栏目名栏目id
 			request.setAttribute("categoryName",category.getName());
 			request.setAttribute("categoryId",categoryId);
-			
+			System.out.println("------------");
 			//传递文章名文章id
 			request.setAttribute("articleName", articleName);
 			request.setAttribute("articleId", chapter.getArticleId());
 			//传递章节id
 			request.setAttribute("chapterId", chapter.getId());
 			request.setAttribute("chapter", chapter);
+			System.out.println("即将返回页面");
 			return "foreground/chapter";
 		} catch (Exception e) {
-			return "error";
+			System.out.println("Error!!!!!!!!");
+			return null;
 		}
 	}
 	
 	@RequestMapping("/background/chapter/deleteById/{id}")
 	@ApiOperation("根据id删除章节")
 	@ResponseBody
-	public String deleteById(@PathVariable Integer id){
+	public String deleteById(@PathVariable Long id){
 		try {
 			chapterService.deleteById(id);
 			return "删除成功！";
@@ -126,7 +148,7 @@ public class ChapterController {
 	
 	@ApiOperation("根据文章ID查询文章所有章节")
 	@RequestMapping("/background/chapter/findByArticleId/{articleId}")
-	public String findByArticleId(@PathVariable Integer articleId,HttpServletRequest request){
+	public String findByArticleId(@PathVariable Long articleId,HttpServletRequest request){
 		List<ChapterPack> cpList = new ArrayList<>();
 		List<Chapter> chapterList = chapterService.findByArticleId(articleId);
 		for(Chapter chapter:chapterList) {

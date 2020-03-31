@@ -12,6 +12,6 @@ public interface ILinkService {
 	
 	public void saveOrUpdate(Link link)throws Exception;
 	public List<Link> findAll();
-	public Link findById(Integer id);
-	public void deleteById(Integer id) throws Exception;
+	public Link findById(Long id);
+	public void deleteById(Long id) throws Exception;
 }

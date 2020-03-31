@@ -176,6 +176,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 		let articleId;
 		// 点击新增显示模态框
 		$('#add').click(function(){
+			articleId=null;
 			$('#toAdd').show();
 		})
 		// 新增模态框关闭
@@ -197,7 +198,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 			let articleState = $("input[name=articleState]").val();
 			let articleWords = $("input[name=articleWords]").val();
 			let categoryName = $("select[name=categoryName] option:selected").val();
-			articleId=null;
+			
 			let data = {
 				id:articleId,
 				title:articleTitle,

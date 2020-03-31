@@ -24,7 +24,7 @@ public class CategoryServiceImpl implements ICategoryService{
 		return list;
 	}
 	@Override
-	public void deleteById(int id) throws Exception {
+	public void deleteById(Long id) throws Exception {
 		Optional<Category> opt = categoryDao.findById(id);
 		Category category = opt.isPresent()?opt.get():null;
 		if(category!=null) {
@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements ICategoryService{
 	@Override
 	public void saveOrUpdate(Category category) throws Exception {
 		if(category!=null){
-			Integer id=category.getId();
+			Long id=category.getId();
 			if(id==null) {
 				categoryDao.save(category);
 			}else {
@@ -56,7 +56,7 @@ public class CategoryServiceImpl implements ICategoryService{
 		}
 	}
 	@Override
-	public Category findById(int id) throws Exception {
+	public Category findById(Long id) throws Exception {
 		Optional<Category> opt = categoryDao.findById(id);
 		Category category = opt.isPresent()?opt.get():null;
 		
@@ -67,9 +67,9 @@ public class CategoryServiceImpl implements ICategoryService{
 		}
 	}
 	@Override
-	public Integer findIdByName(String name) throws Exception {
+	public Long findIdByName(String name) throws Exception {
 		if(name!=null) {
-			Integer id = categoryDao.findIdByName(name);
+			Long id = categoryDao.findIdByName(name);
 			if(id!=null)
 				return id;
 			else
@@ -79,7 +79,7 @@ public class CategoryServiceImpl implements ICategoryService{
 	}
 	
 	@Override
-	public String findNameById(Integer id)  {
+	public String findNameById(Long id)  {
 		
 		String  name = categoryDao.findNameById(id);
 		return name;

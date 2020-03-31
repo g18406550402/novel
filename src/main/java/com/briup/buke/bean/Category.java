@@ -24,7 +24,7 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@ApiModelProperty(value="栏目id")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="栏目代码",required=true)
 	private Long code;
 	@ApiModelProperty(value="栏目名",required=true)
@@ -55,16 +55,16 @@ public class Category {
 	}
 
 
-	public Category(Integer id, Long code, String name) {
+	public Category(Long id, Long code, String name) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.name = name;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

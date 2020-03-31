@@ -34,12 +34,12 @@ public class Article {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@ApiModelProperty(value="文章ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="文章作者")
 	private String author;
 	@ApiModelProperty(value="点击次数",hidden=true)
 	@Column(name="clickTimes")
-	private Integer clickTimes;
+	private Long clickTimes;
 	@Lob
 	@Column(columnDefinition="text")
 	@ApiModelProperty(value="文章简介")
@@ -52,12 +52,12 @@ public class Article {
 	@ApiModelProperty(value="文章状态")
 	private String state;
 	@ApiModelProperty(value="文章字数（万字）")
-	private Integer words;
+	private Long words;
 	@ApiModelProperty(value="文章图片URL")
 	private String image;
 	@JoinColumn(name="category_id")
 	//@Column(name="category_id")
-	private Integer category_id;
+	private Long category_id;
 	
 	@JsonIgnore
 	@OneToMany
@@ -68,8 +68,8 @@ public class Article {
 	private List<Comment> comments;
 	public Article() {}
 
-	public Article(Integer id, String author, Integer clickTimes, String intro, Date updateDate, String title,
-			String state, Integer words, String image, Integer category_id) {
+	public Article(Long id, String author, Long clickTimes, String intro, Date updateDate, String title,
+			String state, Long words, String image, Long category_id) {
 		super();
 		this.id = id;
 		this.author = author;
@@ -83,11 +83,11 @@ public class Article {
 		this.category_id = category_id;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -99,11 +99,11 @@ public class Article {
 		this.author = author;
 	}
 
-	public Integer getClickTimes() {
+	public Long getClickTimes() {
 		return clickTimes;
 	}
 
-	public void setClickTimes(Integer clickTimes) {
+	public void setClickTimes(Long clickTimes) {
 		this.clickTimes = clickTimes;
 	}
 
@@ -139,11 +139,11 @@ public class Article {
 		this.state = state;
 	}
 
-	public Integer getWords() {
+	public Long getWords() {
 		return words;
 	}
 
-	public void setWords(Integer words) {
+	public void setWords(Long words) {
 		this.words = words;
 	}
 
@@ -155,11 +155,11 @@ public class Article {
 		this.image = image;
 	}
 
-	public Integer getCategory_id() {
+	public Long getCategory_id() {
 		return category_id;
 	}
 
-	public void setCategory_id(Integer category_id) {
+	public void setCategory_id(Long category_id) {
 		this.category_id = category_id;
 	}
 

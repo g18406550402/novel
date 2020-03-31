@@ -17,7 +17,7 @@ public class Chapter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@ApiModelProperty(value="章节ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="章节标题")
 	private String subtitle;
 	@Lob
@@ -26,10 +26,10 @@ public class Chapter {
 	private String content;
 	@ApiModelProperty(value="小说id")
 	@Column(name="article_id")
-	private Integer articleId;
+	private Long articleId;
 	
 	
-	public Chapter(Integer id, String subtitle, String content, Integer articleId) {
+	public Chapter(Long id, String subtitle, String content, Long articleId) {
 		super();
 		this.id = id;
 		this.subtitle = subtitle;
@@ -39,10 +39,10 @@ public class Chapter {
 	public Chapter() {
 		super();
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getSubtitle() {
@@ -58,10 +58,10 @@ public class Chapter {
 		this.content = content;
 	}
 	
-	public Integer getArticleId() {
+	public Long getArticleId() {
 		return articleId;
 	}
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(Long articleId) {
 		this.articleId = articleId;
 	}
 	@Override

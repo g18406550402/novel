@@ -21,20 +21,20 @@ public class ChapterServiceImpl implements IChapterService {
 	@Override
 	public void saveOrUpdate(Chapter chapter) throws Exception {
 		if(chapter!=null) {
-			Integer id = chapter.getId();
+			Long id = chapter.getId();
 			if(id==null) {
 				//插入章节是修改文章的upadateDate
-				Integer articleId = chapter.getArticleId();
+				Long articleId = chapter.getArticleId();
 				Article article = articleDao.findById(articleId).get();
 				articleDao.save(article);
 				chapterDao.save(chapter);
 			}else {
 				//根据id查出文章
-				Chapter chapter_db = chapterDao.findById(id).get();
+				Chapter chapter_db = chapterDao.findById(id).get(); 
 				//更改标题作者栏目
 				String subtitle = chapter.getSubtitle();
 				String content = chapter.getContent();
-				Integer articleId = chapter.getArticleId();
+				Long articleId = chapter.getArticleId();
 				if(subtitle!=null&&(subtitle!="")) 
 					chapter_db.setSubtitle(subtitle);
 				if(content!=null&&(content!=""))
@@ -50,7 +50,7 @@ public class ChapterServiceImpl implements IChapterService {
 	}
 
 	@Override
-	public void deleteById(Integer id) throws Exception {
+	public void deleteById(Long id) throws Exception {
 		Optional<Chapter> opt = chapterDao.findById(id);
 		Chapter chapter = opt.isPresent()?opt.get():null;
 		if(chapter!=null) {
@@ -61,7 +61,7 @@ public class ChapterServiceImpl implements IChapterService {
 	}
 
 	@Override
-	public Chapter findById(Integer id) throws Exception {
+	public Chapter findById(Long id) throws Exception {
 		Optional<Chapter> opt = chapterDao.findById(id);
 		Chapter chapter = opt.isPresent()?opt.get():null;
 		if(chapter!=null) {
@@ -72,13 +72,13 @@ public class ChapterServiceImpl implements IChapterService {
 	}
 	
 	@Override
-	public List<Chapter> findByArticleId(Integer article_id) {
+	public List<Chapter> findByArticleId(Long article_id) {
 		List<Chapter> chapList = chapterDao.findByArticleId(article_id);
 		return chapList;
 	}
 
 	@Override
-	public List<Chapter> findUpdateChapter(Integer id) {
+	public List<Chapter> findUpdateChapter(Long id) {
 		List<Chapter> chapterList = chapterDao.findUpdateChapter(id);
 		return chapterList;
 	}

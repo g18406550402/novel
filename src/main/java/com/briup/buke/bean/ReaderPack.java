@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class ReaderPack {
 	@ApiModelProperty(value="读者ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="读者标识名")
 	private String username;
 	@ApiModelProperty(value="读者密码")
@@ -14,17 +14,17 @@ public class ReaderPack {
 	public ReaderPack() {
 		super();
 	}
-	public ReaderPack(Integer id, String username, String password, String email) {
+	public ReaderPack(Long id, String username, String password, String email) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {

@@ -16,7 +16,7 @@ public class Link {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@ApiModelProperty(value="链接id")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty(value="链接名")
 	private String name;
 	@ApiModelProperty(value="链接地址")
@@ -29,10 +29,10 @@ public class Link {
 		this.name = name;
 		this.url = url;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {

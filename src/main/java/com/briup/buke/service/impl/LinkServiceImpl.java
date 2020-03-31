@@ -17,7 +17,7 @@ public class LinkServiceImpl implements ILinkService{
 	@Override
 	public void saveOrUpdate(Link link) throws CustomerException {
 		if(link!=null) {
-			Integer id = link.getId();
+			Long id = link.getId();
 			if(id==null) {
 				linkDao.save(link);
 			}else {
@@ -40,7 +40,7 @@ public class LinkServiceImpl implements ILinkService{
 		return list;
 	}
 	@Override
-	public Link findById(Integer id) {
+	public Link findById(Long id) {
 		Optional<Link> opt = linkDao.findById(id);
 		Link link = opt.isPresent()?opt.get():null;
 		
@@ -48,7 +48,7 @@ public class LinkServiceImpl implements ILinkService{
 		
 	}
 	@Override
-	public void deleteById(Integer id) throws Exception {
+	public void deleteById(Long id) throws Exception {
 		Optional<Link> opt = linkDao.findById(id);
 		Link link = opt.isPresent()?opt.get():null;
 		if(link!=null) {

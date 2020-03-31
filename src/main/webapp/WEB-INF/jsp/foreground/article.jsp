@@ -47,7 +47,7 @@
 					</div>
 					<div id="button_all">
 						<ul>
-							<li class="b1"><a rel="nofollow" href="/foreground/toChapter?id=${chapterList[1].id }">全文阅读</a></li>
+							<li class="b1"><a rel="nofollow" href="/foreground/toChapter?id=${chapterList[0].id }">全文阅读</a></li>
 							<li class="b2"><a href="javascript:void(0);" onclick="addToBookShelf()">放入书架</a></li>
 						</ul>
 						<div style="clear: both"></div>
@@ -111,7 +111,7 @@
 			</div>
 			<ul class="chaw">
 				 <c:forEach items="${updateList}" var="chapter">
-				<li><a href="/foreground/toChapter?id=${chapter.id }">${chapter.subtitle}</a></li>
+				<li><a href="/foreground/toChapter/${chapter.id }">${chapter.subtitle}</a></li>
 				</c:forEach> 
 			</ul>
 			<div class="newrap_c">
@@ -120,7 +120,7 @@
 			</div>
 			<ul class="chaw_c" id="chapterList">
 				<c:forEach items="${chapterList }" var="chapter">
-				<li><a href="/foreground/toChapter?id=${chapter.id }">${chapter.subtitle }</a></li>
+				<li><a href="/foreground/toChapter/${chapter.id }">${chapter.subtitle }</a></li>
 				</c:forEach>
 			</ul>
 		</div>
