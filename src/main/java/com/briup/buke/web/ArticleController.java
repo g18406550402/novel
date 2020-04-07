@@ -1,6 +1,9 @@
 package com.briup.buke.web;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -106,7 +109,6 @@ public class ArticleController {
 			//传递章节信息
 			List<Chapter> chapterList = chapterService.findByArticleId(article.getId());
 			request.setAttribute("chapterList", chapterList);
-			System.out.println(chapterList);
 			//传递最新章节信息
 			List<Chapter> updateList = chapterService.findUpdateChapter(article.getId());
 			request.setAttribute("updateList", updateList);
@@ -122,6 +124,43 @@ public class ArticleController {
 		
 		return "foreground/article";
 	}
+	@RequestMapping("/foreground/article/reverseOrderChapter/{articleId}")
+	@ResponseBody
+	public Message<List<Chapter>> reverseOrder(@PathVariable Long articleId){
+		//传递章节信息
+		List<Chapter> chapterList = chapterService.findByArticleId(articleId);
+		Collections.sort(chapterList,new Comparator<Chapter>() {
+			@Override
+			public int compare(Chapter o1, Chapter o2) {
+				Long diff = o1.getId()-o2.getId();
+				if(diff>0)
+					return -1;
+				else if(diff<0)
+					return 1;
+				return 0;
+			}
+		});
+		return MessageUtil.success(chapterList);
+	}
+	@RequestMapping("/foreground/article/positiveSequence/{articleId}")
+	@ResponseBody
+	public Message<List<Chapter>> positiveSequence(@PathVariable Long articleId){
+		//传递章节信息
+		List<Chapter> chapterList = chapterService.findByArticleId(articleId);
+		Collections.sort(chapterList,new Comparator<Chapter>() {
+			@Override
+			public int compare(Chapter o1, Chapter o2) {
+				Long diff = o1.getId()-o2.getId();
+				if(diff>0)
+					return 1;
+				else if(diff<0)
+					return -1;
+				return 0;
+			}
+		});
+		return MessageUtil.success(chapterList);
+	}
+	
 	
 	@RequestMapping("/background/article/findById/{id}")
 	@ApiOperation("根据id查询文章")
@@ -146,6 +185,7 @@ public class ArticleController {
 			
 			return ac;
 		} catch (Exception e) {
+			System.out.println("Error!!!!!!!!");
 			e.getMessage();
 			return null;
 		}

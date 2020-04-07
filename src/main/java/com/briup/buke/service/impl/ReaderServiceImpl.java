@@ -110,7 +110,7 @@ public class ReaderServiceImpl implements IReaderService{
 		reader.setChapters(chapterList);
 		readerDao.save(reader);
 	}
-
+	
 	@Override
 	public void commentaryArticle(Long reader_id, Comment comment) {
 		//根据id查出读者
@@ -138,6 +138,29 @@ public class ReaderServiceImpl implements IReaderService{
 		}else {
 			throw new Exception("用户名错误，请确认用户名是否输入正确！！"); 
 		}
+		
+	}
+
+	@Override
+	public void removeFromBookShelf(Long readerId, Long articleId) {
+		Reader reader = readerDao.findById(readerId).get();
+		Article article = articleDao.findById(articleId).get();
+		Set<Article> articleList = reader.getArticles();
+		articleList.remove(article);
+		reader.setArticles(articleList);
+		readerDao.save(reader);
+		
+	}
+
+	@Override
+	public void deleteBookMark(Long readerId, Long chapterId) {
+		Reader reader = readerDao.findById(readerId).get();
+		//添加书签
+		Chapter chapter = chapterDao.findById(chapterId).get();
+		Set<Chapter> chapterList = reader.getChapters();
+		chapterList.remove(chapter);
+		reader.setChapters(chapterList);
+		readerDao.save(reader);
 		
 	}
 	 

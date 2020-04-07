@@ -18,4 +18,6 @@ public interface IChapterService {
 	public List<Chapter> findUpdateChapter(Long id);
 	
 	public List<Chapter> findAll();
+	
+	public Chapter findLatestChapter(Long articleId);
 }

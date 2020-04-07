@@ -1,21 +1,22 @@
 package com.briup.buke.bean;
 
-public class ChapterPack {
+public class BookMark {
 	private Long id;
 	private String subtitle;
-	private String content;
 	private Long articleId;
 	private String articleTitle;
-	public ChapterPack(Long id, String subtitle, String content, Long articleId, String articleTitle) {
+	private String articleImage;
+
+	public BookMark(Long id, String subtitle, Long articleId, String articleTitle, String articleImage) {
 		super();
 		this.id = id;
 		this.subtitle = subtitle;
-		this.content = content;
 		this.articleId = articleId;
 		this.articleTitle = articleTitle;
+		this.articleImage = articleImage;
 	}
 	
-	public ChapterPack() {
+	public BookMark() {
 		super();
 	}
 
@@ -31,12 +32,7 @@ public class ChapterPack {
 	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
 	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+
 	public Long getArticleId() {
 		return articleId;
 	}
@@ -49,11 +45,19 @@ public class ChapterPack {
 	public void setArticleTitle(String articleTitle) {
 		this.articleTitle = articleTitle;
 	}
+	public String getArticleImage() {
+		return articleImage;
+	}
+	public void setArticleImage(String articleImage) {
+		this.articleImage = articleImage;
+	}
 	@Override
 	public String toString() {
-		return "ChapterPack [id=" + id + ", subtitle=" + subtitle + ", content=" + content + ", articleId=" + articleId
-				+ ", articleTitle=" + articleTitle + "]";
+		return "BookMark [id=" + id + ", subtitle=" + subtitle + ", articleId=" + articleId + ", articleTitle="
+				+ articleTitle + ", articleImage=" + articleImage + "]";
 	}
+	
+	
 	
 	
 }

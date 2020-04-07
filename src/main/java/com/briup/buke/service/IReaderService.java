@@ -16,7 +16,11 @@ public interface IReaderService {
 	
 	public void addToBookShelf (Long reader_id,Long article_id);
 	
+	public void removeFromBookShelf(Long readerId,Long articleId);
+	
 	public void addBookMark(Long reader_id,Long chapter_id);
+	
+	public void deleteBookMark(Long readerId,Long chapterId);
 	
 	public void commentaryArticle(Long reader_id,Comment comment);
 	

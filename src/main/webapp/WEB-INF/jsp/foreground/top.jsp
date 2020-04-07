@@ -18,7 +18,7 @@
 					<input type="text" name="username" placeholder="帐号" class="putk">&nbsp;&nbsp;
 					<input type="password" name="password" placeholder="密码" class="putk">
 					<input type="submit" name="submit" class="logint" value="登录">&nbsp;&nbsp;
-					<a href="/foreground/register">注册</a> 
+					<a href="/foreground/toRegister">注册</a> 
 					<input type="hidden" name="action" value="login">
 				</form>
 			</c:when>
@@ -48,12 +48,10 @@
 						onfocus="if(this.value=='书名｜作者名'){this.value='';}"></span>
 					<button type="submit" class="serBtn">搜索</button>
 				</form>
-				<div class="hot">
-					热搜：<a href="/foreground/toArticle?id=1" target="_blank">斗破苍穹</a>
-						<a href="/foreground/toArticle?id=2" target="_blank">斗罗大陆</a>
-						<a href="/foreground/toArticle?id=3" target="_blank">凡人修仙传</a>
-						<a href="/foreground/toArticle?id=4" target="_blank">九州缥缈录</a>
-						<a href="/foreground/toArticle?id=5" target="_blank">一念永恒</a>
+				<div class="hot">热搜：
+					<c:forEach items="${hotSearch }" var="article">
+					<a href="/foreground/toArticle?id=${article.id }" target="_blank">${article.title }</a>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="clearfix"></div>

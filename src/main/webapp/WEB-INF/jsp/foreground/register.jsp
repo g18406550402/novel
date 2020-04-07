@@ -58,7 +58,7 @@
 		<div class="loginall">
 			<div class="lc">
 				<form name="frmregister" id="frmregister"
-					action="https://www.x23qb.com/register.php?do=submit" method="post">
+					action="/foreground/register" method="post">
 					<table class="grid" width="250" align="center">
 						<tr>
 							<td class="odd" width="25%">用 户 名<span class="hottext">*</span></td>

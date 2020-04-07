@@ -5,8 +5,8 @@
 <html>
 <head>
 <title>阅读记录_布克小说</title>
-<link rel="stylesheet" type="text/css"
-	href="http://localhost:8080/css/book.css?1201" media='all' />
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/css/book.css?1201" media='all' />
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>	
 </head>
 <body>
 	<%@ include file="top.jsp"%>
@@ -26,43 +26,24 @@
 				<div class="r_2">
 					<div id="history">
 						<ul>
-						<c:forEach items="${reader.chapters }" var="chapter">
+						<c:forEach items="${chapterList }" var="chapter">
 						<li class="bookone"><div class="bcimg">
-								<a href="/book/186625/" target="_blank"><img
-									src="#"
+								<a href="/foreground/toArticle?id=${chapter.articleId }"" target="_blank"><img
+									src="${chapter.articleImage }"
 									style="display: inline;" width="48" height="69"></a>
 							</div>
 							<div class="bcinfo">
 								<div class="casename" style="line-height: 35px;">
-									书名：<a href="/book/186625/" target="_blank">从火影开始掌控时间</a>
+									书名：<a href="/foreground/toArticle?id=${chapter.articleId }" target="_blank">${chapter.articleTitle }</a>
 								</div> 
 								<div class="upcase" style="height: 36px;">
 									记录：<a href="/book/186625/72699053.html" target="_blank">${chapter.subtitle }</a>
 								</div>
 								<div class="casedel">
-									<a href="#">移除</a>
+									<a><i value="${chapter.id}" class="deleteBookMark">移除</i></a>
 								</div>
 							</div></li>
 							</c:forEach>
-						<!-- <li class="bookone"><div class="bcimg">
-								<a href="/book/176505/" target="_blank"><img
-									src="/files/article/image/176/176505/176505s.jpg"
-									src="/files/article/image/176/176505/176505s.jpg"
-									style="display: inline;" width="48" height="69"></a>
-							</div>
-							<div class="bcinfo">
-								<div class="casename" style="line-height: 35px;">
-									书名：<a href="/book/176505/" target="_blank">我师兄实在太稳健了</a>
-								</div>
-								<div class="upcase" style="height: 36px;">
-									记录：<a href="/book/176505/72692220.html" target="_blank">第357章
-										其实可以有</a>
-								</div>
-								<div class="casedel">
-									<a href="javascript:removebook('176505')">移除</a>
-								</div>
-							</div>
-						</li> -->
 						</ul>
 					</div>
 
@@ -71,8 +52,21 @@
 			<div style="clear: both"></div>
 		</div>
 	</div>
+	<script>
+		$(function(){
+			$(".deleteBookMark").click(function(){
+				let chapterId = $(this).attr("value");
+				let readerId = <%=session.getAttribute("readerId")%>;
+				let url = "http://localhost:8080/foreground/deleteBookMark?readerId="+readerId+"&chapterId="+chapterId;
+				$.get(url,function(data){
+					
+				})
+				let url1 = "http://localhost:8080/foreground/toMyBookmark?reader_id="+readerId;
+				$(".user_right").load(url1);
+			})
+		})
+	</script>
 	<div id="footer">
-
 		<p class="copyright">布克小说网</p>
 	</div>
 </body>

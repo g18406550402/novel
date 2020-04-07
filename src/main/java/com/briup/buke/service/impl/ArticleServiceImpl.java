@@ -104,5 +104,15 @@ public class ArticleServiceImpl implements IArticleService{
 		String articleName = articleDao.findArticleNameByArticleId(id);
 		return articleName;
 	}
+	@Override
+	public Long findArticleIdByArticleName(String articleName) {
+		Long articleId = articleDao.findArticleIdByArticleName(articleName);
+		return articleId;
+	}
+	@Override
+	public List<Article> findHotSearch() {
+		List<Article> articleList = articleDao.findHotSearch();
+		return articleList;
+	}
 	
 }

@@ -36,6 +36,15 @@ public class Chapter {
 		this.content = content;
 		this.articleId = articleId;
 	}
+	
+	
+	public Chapter(Long id, String subtitle) {
+		super();
+		this.id = id;
+		this.subtitle = subtitle;
+	}
+
+
 	public Chapter() {
 		super();
 	}
@@ -66,8 +75,10 @@ public class Chapter {
 	}
 	@Override
 	public String toString() {
-		return "Chapter [id=" + id + ", subtitle=" + subtitle + ", content=" + content + "]";
+		return "Chapter [id=" + id + ", subtitle=" + subtitle + ", content=" + content + ", articleId=" + articleId
+				+ "]";
 	}
+	
 	
 	
 }

@@ -1,7 +1,10 @@
 package com.briup.buke.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.briup.buke.bean.Article;
 import com.briup.buke.bean.Category;
@@ -106,27 +111,47 @@ public class ChapterController {
 			String articleName = articleService.findArticleNameByArticleId(chapter.getArticleId());
 			System.out.println("articleId:"+chapter.getArticleId());
 			Long categoryId = articleService.findCategoryIdByArticleId(chapter.getArticleId());
-			//id大时出错
-			System.out.println("categoryId:"+categoryId);
-			System.out.println("id大时出错");
 			Category category = categoryService.findById(categoryId);
-			System.out.println("id大时没有出错");
+			System.out.println(category);
 			//传递上一章下一章id
-			Long nextId=++id;
-			Long preId=--id;
+			List<Chapter> chapterList = chapterService.findByArticleId(chapter.getArticleId());
+			int chapterNum = chapterList.size();
+			int curIndex = -1;
+			Long[] idList = new Long[chapterNum];
+			for(int i=0;i<chapterNum;i++) {
+				idList[i]=chapterList.get(i).getId();
+			}
+			System.out.println("id"+id);
+			System.out.println("idList[0]"+idList[0]);
+			//数组中当前章节元素下标
+			for(int j=0;j<chapterNum;j++) {
+				if(id==idList[j]) {
+					curIndex=j;
+					break;
+				}
+			}
+			System.out.println("curIndex:"+curIndex);
+			Long nextId,preId;
+			if(curIndex+1<chapterNum)
+				nextId=idList[curIndex+1];
+			else
+				nextId=-1l;
+			System.out.println("nextIndex:"+curIndex);
+			if(curIndex-1>=0)
+				preId=idList[curIndex-1];
+			else
+				preId=-1l;
 			request.setAttribute("nextId",nextId);
 			request.setAttribute("preId",preId);
 			//传递栏目名栏目id
 			request.setAttribute("categoryName",category.getName());
 			request.setAttribute("categoryId",categoryId);
-			System.out.println("------------");
 			//传递文章名文章id
 			request.setAttribute("articleName", articleName);
 			request.setAttribute("articleId", chapter.getArticleId());
 			//传递章节id
 			request.setAttribute("chapterId", chapter.getId());
 			request.setAttribute("chapter", chapter);
-			System.out.println("即将返回页面");
 			return "foreground/chapter";
 		} catch (Exception e) {
 			System.out.println("Error!!!!!!!!");
@@ -161,4 +186,7 @@ public class ChapterController {
 		request.setAttribute("chapterList", cpList);
 		return "background/chapter";
 	}
+	
+	
+
 }

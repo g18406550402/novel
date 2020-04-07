@@ -5,7 +5,7 @@
 <!-- 章节信息查询 -->
 <div id="chapter">
 <div>
-  <form class="form-inline">
+<form class="form-inline">
   <div class="form-group">
 	<select name="search" id="" class="form-control">
 		<option value="">请选择所属文章标题</option>
@@ -17,6 +17,12 @@
   <input class="btn btn-default search" type="button" value="查询">
   <input class="btn btn-default" type="reset" value="重置">
   <input class="btn btn-default" type="button" value="新增" id="add">
+</form>
+<form class="form-inline" action="/background/upload" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<input type="file" name="file">
+		<input class="btn btn-default" type="submit" value="上传">
+	</div>
 </form>
 </div>
 <div>

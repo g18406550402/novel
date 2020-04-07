@@ -833,6 +833,9 @@ ul.links a {
 .fr {
 	float: right
 }
+#mlfy_main_text.zt1 {
+	font-family: Microsoft YaHei
+}
 
 #mlfy_main_text.zt2 {
 	font-family: SimSun
@@ -843,7 +846,7 @@ ul.links a {
 }
 
 #mlfy_main_text.zt4 {
-	font-family:MingLiU
+	font-family:YouYuan
 }
 
 #mlfy_main_text.zt5 {

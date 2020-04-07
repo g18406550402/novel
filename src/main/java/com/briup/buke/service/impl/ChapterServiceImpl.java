@@ -89,4 +89,10 @@ public class ChapterServiceImpl implements IChapterService {
 		return chapterList;
 	}
 
+	@Override
+	public Chapter findLatestChapter(Long articleId) {
+		Chapter chapter = chapterDao.findLatestChapter(articleId);
+		return chapter;
+	}
+
 }

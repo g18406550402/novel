@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>布克小说_最值得书友收藏的网络小说阅读网</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/css/book.css?0901" media='all' />
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/css/book.css" media='all' />
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 </head>
 <body>

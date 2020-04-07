@@ -1,6 +1,7 @@
 package com.briup.buke;
 
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,16 +34,40 @@ public class BukeApplicationTests {
 	@Test
 	public void test() throws Exception {
 		System.out.println("---------------------------");
-		Long categoryId = articleService.findCategoryIdByArticleId(chapter.getArticleId());
 		//List<Article> articles = category.getArticles();
-		System.out.println(chapter);
 		//System.out.println(articles);
 		System.out.println("---------------------------");
 	}
 	@Test
 	public void contextLoads() {
-		
-		
+		Scanner sc = new Scanner(System.in);
+        String  s = sc.nextLine();
+        int res = 0;
+        char[] c = s.toCharArray();
+        for(int i=0;i<c.length;i++){
+            if(c[i]=='(') {
+            	res+=1;
+            }
+            if(c[i]==')') {
+            	res-=1;
+            }
+            if(c[i]=='[') {
+            	res+=2;
+            }
+            if(c[i]==']') {
+            	res-=2;
+            }
+            if(c[i]=='{') {
+            	res+=4;
+            }
+            if(c[i]=='}') {
+            	res-=4;
+            }
+        }
+        if(res==0)
+        	System.out.println("true");
+        else
+        	System.out.println("false");
 	}
 
 }

@@ -13,4 +13,7 @@ public interface ChapterDao extends JpaRepository<Chapter, Long> {
 	
 	@Query(value="select * from book_chapter c where c.article_id=?1 order by c.id desc limit 6",nativeQuery=true)
 	public List<Chapter> findUpdateChapter(Long id);
+	
+	@Query(value="select * from book_chapter where id = (select max(id) as id from book_chapter c where c.article_id=?1)",nativeQuery=true)
+	public Chapter findLatestChapter(Long articleId);
 }

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.briup.buke.bean.Article;
+import com.briup.buke.bean.Chapter;
 
 public interface ArticleDao extends JpaRepository<Article, Long>{
 	@Query(value="select c.category_id from book_article c where c.id=?1",nativeQuery=true)
@@ -26,4 +27,10 @@ public interface ArticleDao extends JpaRepository<Article, Long>{
 	
 	@Query(value="select c.title from book_article c where c.id=?1",nativeQuery=true)
 	public String findArticleNameByArticleId(Long id);
+	
+	@Query(value="select c.id from book_article c where c.title=?1",nativeQuery=true)
+	public Long findArticleIdByArticleName(String articleName);
+	
+	@Query(value="select * from book_article a order by a.clickTimes desc limit 5",nativeQuery=true)
+	public List<Article> findHotSearch();
 }

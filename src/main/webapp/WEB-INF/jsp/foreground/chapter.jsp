@@ -115,6 +115,8 @@
 				   expires: 7,
 				   path: "http://localhost:8080/foreground/toChapter"
 				 })
+				$(".mlfy_main_sz").removeClass("hover");
+				$(".szk").removeClass("hover");
 			});
 			$(".mlfy_main_sz .btn-wrap .grey-btn").click(function(){
 				$("body").removeClass().addClass("bg6");
@@ -135,7 +137,7 @@
 		<div class="bar">
 			<div class="chepnav">
 				<i>当前位置:</i><a href="/foreground/toIndex">铅笔小说</a>><a
-					href="/foreground/toCategory?id=${categoryId }">${categoryName }</a>><a
+					href="/foreground/toCategory?categoryId=${categoryId }">${categoryName }</a>><a
 					href="/foreground/toArticle?id=${articleId }">${articleName}</a>> <em>${chapter.subtitle }</em>
 			</div>
 			<c:set var="username" value="${reader.username}" />
@@ -173,7 +175,7 @@
 			</ul>
 			<div class="mlfy_main_l">
 				<i class="szk"><em class="icon-home3"></em> <z>阅读</z>设置</i> <i
-					class="hid">（推荐配合 快捷键[F11] 进入全屏沉浸式阅读）</i>
+					class="hid">（推荐配合 快捷键[F11] 提升阅读体验）</i>
 			</div>
 		</div>
 		<div class="mlfy_main_sz b2" style="margin-left: -485px;">
@@ -186,8 +188,8 @@
 					class="c6"></i><i class="c7"></i><i class="c8"></i></li>
 				<li class="hid"><span class="fl">正文字体</span><span
 					class="zt hover">雅黑</span><span class="zt">宋体</span><span
-					class="zt">楷体</span><span class="zt" title="方正启体简体">细明</span><span
-					class="zt" title="思源黑体 CN">黑体</span><span class="zt" title="苹方字体">正黑</span></li>
+					class="zt">楷体</span><span class="zt" title="幼圆">幼圆</span><span
+					class="zt" title="思黑体">黑体</span><span class="zt" title="正">正黑</span></li>
 				<li><span class="fl">字体大小</span><span class="dx dxl">A-</span><span
 					class="dx dxc">20</span><span class="dx dxr">A+</span></li>
 				<li class="hid"><span class="fl">页面宽度</span>
@@ -212,10 +214,23 @@
 		</div>
 	</div>
 	<p class="mlfy_page">
-		<a href="/foreground/toChapter/preId }">上一章</a>
+		<c:if test="${preId!=-1 }">
+		<a href="/foreground/toChapter/${preId }">上一章</a>
+		</c:if>
+		<c:if test="${preId==-1 }">
+		<a href="#">首章节</a>
+		</c:if>
+		
 		<a href="/foreground/toArticle?id=${chapter.articleId }" rel="nofollow">目录</a>
 		<a href="javascript:void(0);" onclick="addBookMark()">+书签</a>
+		
+		<c:if test="${nextId!=-1 }">
 		<a id="nextChapter" href="/foreground/toChapter/${nextId }">下一章</a>
+		</c:if>
+		<c:if test="${nextId==-1 }">
+		<a id="nextChapter" href="#">末章节</a>
+		</c:if>
+		
 	</p>
 	<div class="bd"></div>
 	<script>

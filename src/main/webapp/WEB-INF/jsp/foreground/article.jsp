@@ -47,7 +47,7 @@
 					</div>
 					<div id="button_all">
 						<ul>
-							<li class="b1"><a rel="nofollow" href="/foreground/toChapter?id=${chapterList[0].id }">全文阅读</a></li>
+							<li class="b1"><a rel="nofollow" href="/foreground/toChapter/${chapterList[0].id }">全文阅读</a></li>
 							<li class="b2"><a href="javascript:void(0);" onclick="addToBookShelf()">放入书架</a></li>
 						</ul>
 						<div style="clear: both"></div>
@@ -116,7 +116,7 @@
 			</ul>
 			<div class="newrap_c">
 				<h2>${article.title}全文阅读</h2>
-				<span onclick="#">倒序 ↑</span>
+				<span onclick="reverseOrder()">倒序 ↑</span>
 			</div>
 			<ul class="chaw_c" id="chapterList">
 				<c:forEach items="${chapterList }" var="chapter">
@@ -129,7 +129,46 @@
 	<div id="footer">
 		<p class="copyright">布克小说网</p>
 	</div>
+<script>
 	
+	function reverseOrder(){
+		$("div.newrap_c span").remove();
+		$(`<span onclick="positiveSequence()">正序↓</span>`).appendTo("div.newrap_c");
+		$("#chapterList").empty();
+		let articleId = <%=request.getAttribute("articleId")%>;
+		let url="http://localhost:8080/foreground/article/reverseOrderChapter/"+articleId;
+		$.get(url,function(result){
+			let data = result.data;
+			data.forEach(function(item){
+				console.log(item.id);
+				console.log(item.subtitle);
+				let href = "/foreground/toChapter/"+item.id;
+				$(`
+					<li><a href=`+href+`>`+item.subtitle+`</a></li>	
+				`).appendTo("#chapterList");
+			})
+		})
+	}
+	function positiveSequence(){
+		$("div.newrap_c span").remove();
+		$(`<span onclick="reverseOrder()">倒序 ↑</span>`).appendTo("div.newrap_c");
+		$("#chapterList").empty();
+		let articleId = <%=request.getAttribute("articleId")%>;
+		let url="http://localhost:8080/foreground/article/positiveSequence/"+articleId;
+		$.get(url,function(result){
+			let data = result.data;
+			data.forEach(function(item){
+				console.log(item.id);
+				console.log(item.subtitle);
+				let href = "/foreground/toChapter/"+item.id;
+				$(`
+					<li><a href=`+href+`>`+item.subtitle+`</a></li>	
+				`).appendTo("#chapterList");
+			})
+		})
+		
+	}
+</script>
 </body>
 
 </html>

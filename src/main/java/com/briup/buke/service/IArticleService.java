@@ -20,4 +20,8 @@ public interface IArticleService {
 	public List<Article> findByTitleOrArthor(String titleOrAuthor);
 	
 	public String findArticleNameByArticleId(Long id);
+	
+	public Long findArticleIdByArticleName(String articleName);
+	
+	public List<Article> findHotSearch();
 }
